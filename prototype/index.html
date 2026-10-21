@@ -3,117 +3,65 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard – Vereinshub</title>
+    <title>Übersicht - Vereinshub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Manrope:wght@400..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/tokens.css" />
+    <link rel="stylesheet" href="/css/components.css" />
     <link rel="stylesheet" href="/css/style.css" />
   </head>
   <body>
     <header class="site-header">
-      <div class="site-header__inner">
-        <a class="logo" href="/">Vereinshub</a>
-        <nav class="main-nav" aria-label="Hauptnavigation">
-          <ul>
-            <li><a href="/" aria-current="page">Dashboard</a></li>
-            <li><a href="/members/">Mitglieder</a></li>
-            <li><a href="/events/">Veranstaltungen</a></li>
-            <li><a href="/files/">Dateiablage</a></li>
-            <li><a href="/profile">Mein Profil</a></li>
-            <li><a class="nav-admin" href="/admin/">Verwaltung</a></li>
-          </ul>
-        </nav>
-      </div>
+      <a class="logo" href="/">
+        <span class="logo__mark" aria-hidden="true">v</span>
+        <span class="logo__text">vereinshub</span>
+      </a>
+      <nav class="main-nav" aria-label="Hauptnavigation">
+        <ul class="vh-nav">
+          <li><a class="vh-nav-item" href="/" aria-current="page"><svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg>Übersicht</a></li>
+          <li><a class="vh-nav-item" href="/members/"><svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 19v-1a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v1"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 19v-1a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"></path></svg>Mitglieder</a></li>
+          <li><a class="vh-nav-item" href="/events/"><svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"></rect><path d="M16 3v4M8 3v4M3 11h18"></path></svg><span class="sr-mobile">Veranstaltungen</span><span class="nav-label--short" aria-hidden="true">Termine</span></a></li>
+          <li><a class="vh-nav-item" href="/files/"><svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg><span class="sr-mobile">Dateiablage</span><span class="nav-label--short" aria-hidden="true">Dateien</span></a></li>
+          <li><a class="vh-nav-item" href="/admin/"><svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4v5c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V7z"/></svg>Verwaltung</a></li>
+        </ul>
+      </nav>
+      <a class="profile-card" href="/profile">
+        <span class="vh-avatar vh-avatar--violet" aria-hidden="true">PK</span>
+        <span class="profile-card__text sr-mobile">
+          <span class="profile-card__name">Paul Krüssel</span>
+          <span class="profile-card__club">TSV Musterstadt e.V.</span>
+        </span>
+      </a>
     </header>
-
-    <main class="dashboard">
-      <section class="welcome">
-        <h1>Hallo Paul!</h1>
-        <p class="muted">Willkommen zurück beim TSV Musterstadt e.V.</p>
-      </section>
-
-      <section class="card" aria-labelledby="upcoming-heading">
-        <div class="section-header">
-          <h2 id="upcoming-heading">Kommende Veranstaltungen</h2>
-          <a class="button" href="/events/new">Neue Veranstaltung</a>
+    <main>
+      <header class="page-header">
+        <div class="page-header__title">
+          <p class="page-header__date">
+            <time datetime="2026-10-21">Mi · 21. Okt 2026</time>
+          </p>
+          <h1>Guten Tag, Paul.</h1>
         </div>
-
-        <div class="dashboard__upcoming">
-          <div class="calendar">
-            <h3>Oktober 2026</h3>
-            <ol class="calendar__weekdays" aria-hidden="true">
-              <li>Mo</li><li>Di</li><li>Mi</li><li>Do</li><li>Fr</li><li>Sa</li><li>So</li>
-            </ol>
-            <ol class="calendar__days">
-              <li>1</li><li>2</li><li>3</li><li>4</li>
-              <li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>10</li><li>11</li>
-              <li>12</li><li>13</li><li>14</li><li>15</li><li>16</li><li>17</li><li>18</li>
-              <li>19</li><li>20</li><li class="is-today">21</li><li>22</li><li>23</li>
-              <li class="has-event"><a href="/events/herbstwanderung-2026">24</a></li><li>25</li>
-              <li>26</li><li>27</li><li>28</li><li>29</li>
-              <li class="has-event"><a href="/events/mitgliederversammlung-2026">30</a></li><li>31</li>
-            </ol>
-          </div>
-
-          <ul class="event-list">
-            <li>
-              <time datetime="2026-10-24T10:00">Sa, 24.10.</time>
-              <a href="/events/herbstwanderung-2026">Herbstwanderung zum Bodanrück</a>
-            </li>
-            <li>
-              <time datetime="2026-10-30T19:00">Fr, 30.10.</time>
-              <a href="/events/mitgliederversammlung-2026">Mitgliederversammlung 2026</a>
-            </li>
-            <li>
-              <time datetime="2026-11-14T18:00">Sa, 14.11.</time>
-              <a href="/events/laternenlauf-2026">Laternenlauf mit den Jugendgruppen</a>
-            </li>
-          </ul>
+        <div class="page-header__actions">
+          <input type="checkbox" id="theme-toggle">
+          <label for="theme-toggle">
+            <span class="vh-sr">Hellen Modus aktivieren</span>
+            <span class="vh-sr" aria-hidden="true">Dunklen Modus aktivieren</span>
+          </label>
+          <form class="search" action="/members/" method="get" role="search">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="1054.59375 81 16 16"><defs/><g/><g/><g/><g/><g/><g/><g/><g id="svg1" mask="url(#mask-for-svg11)"><g/><g/><g/><g/><g/><g/><g/><mask id="mask-for-svg11"><rect width="16" height="16" x="1054.59375" y="81" fill="#ffffff"/></mask><g transform="matrix(0.666667 0 0 0.666667 1054.59 81)"><circle cx="11" cy="11" r="7" color="rgb(154, 164, 191)" fill="none" stroke="rgb(154, 164, 191)" stroke-linecap="round" stroke-width="2px"/><path d="M20 20l-3.5-3.5" color="rgb(154, 164, 191)" fill="none" stroke="rgb(154, 164, 191)" stroke-linecap="round" stroke-width="2px"/></g></g></svg>
+            <label for="search-q" class="vh-sr">Mitglieder suchen</label>
+            <input id="search-q" name="q" type="search" placeholder="Mitglieder suchen" />
+            <button type="submit" class="vh-sr">Suchen</button>
+          </form>
+          <a class="vh-btn new-event-btn" href="/events/new">
+            <svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+            <span class="sr-mobile">Neuer Termin</span>
+          </a>
         </div>
-      </section>
-
-      <section aria-labelledby="posts-heading">
-        <div class="section-header">
-          <h2 id="posts-heading">Beiträge zu vergangenen Veranstaltungen</h2>
-          <a href="/events/?status=past">Alle vergangenen</a>
-        </div>
-
-        <ul class="card-grid">
-          <li>
-            <article class="card post">
-              <header>
-                <h3><a href="/events/sommerfest-2026">Sommerfest 2026</a></h3>
-                <p class="muted">
-                  von <a href="/members/anna-schmidt">Anna Schmidt</a> ·
-                  <time datetime="2026-09-14">14.09.2026</time>
-                </p>
-              </header>
-              <p>Danke an alle Helferinnen und Helfer! Die Fotos liegen ab sofort in der Dateiablage.</p>
-              <footer>4 Kommentare</footer>
-            </article>
-          </li>
-          <li>
-            <article class="card post">
-              <header>
-                <h3><a href="/events/arbeitseinsatz-vereinsheim">Arbeitseinsatz Vereinsheim</a></h3>
-                <p class="muted">
-                  von <a href="/members/jonas-weber">Jonas Weber</a> ·
-                  <time datetime="2026-10-05">05.10.2026</time>
-                </p>
-              </header>
-              <p>Der Zaun ist gestrichen und die Hütte winterfest. Nächster Termin im Frühjahr.</p>
-              <footer>1 Kommentar</footer>
-            </article>
-          </li>
-        </ul>
-      </section>
+      </header>
     </main>
-
     <footer class="site-footer">
-      <div class="site-footer__inner">
-        <p>&copy; 2026 Vereinshub</p>
-        <ul>
-          <li><a href="/imprint">Impressum</a></li>
-          <li><a href="/privacy">Datenschutz</a></li>
-        </ul>
-      </div>
+      Fuß
     </footer>
   </body>
 </html>
