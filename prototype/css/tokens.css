@@ -57,6 +57,15 @@
   --list-row-height: 4.25rem;        /* 68 px: Mindesthöhe einer Listenzeile */
   --file-icon-size: 2.5rem;          /* 40 px: Dateityp-Symbol und Ordner-Symbol */
 
+  /* Fehlerseite 404: „4 0 4“ als drei Kalenderfelder */
+  --error-content-max-width: 40rem;  /* 640 px: Textblock, Buttons und Schnellzugriff */
+  --error-digits-max-width: 30rem;   /* 480 px: Reihe der drei Felder auf dem Desktop */
+  --error-digit-gap: var(--space-2); /* 8 px auf dem Handy, ab 48em var(--space-3) = 12 px */
+  --error-digit-ratio: 1 / 1.1;      /* Seitenverhältnis eines Feldes (Desktop) */
+  --error-digit-height-mobile: 7.5rem; /* 120 px: feste Feldhöhe auf dem Handy */
+  --error-digit-size: 4.75rem;       /* 76 px: Ziffer auf dem Handy */
+  --error-digit-size-lg: 7rem;       /* 112 px: Ziffer ab 48em */
+
   /* Schatten: nur für den schwebenden Button auf dem Handy */
   --shadow-fab: 0 8px 24px rgba(11, 16, 32, 0.35);
 }
