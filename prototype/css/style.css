@@ -1,0 +1,439 @@
+/* ==========================================================================
+   Vereinshub – Prototyp (Meilenstein 1)
+   Mobile-first: Basis-Styles gelten für kleine Bildschirme,
+   Media Queries erweitern das Layout für Tablet und Desktop.
+   ========================================================================== */
+
+/* ---------- Design-Tokens ---------- */
+:root {
+  /* Farben */
+  --color-primary: #1f5f4a;
+  --color-primary-dark: #154536;
+  --color-primary-light: #e3f0eb;
+  --color-accent: #e08a2c;
+  --color-bg: #f6f7f5;
+  --color-surface: #ffffff;
+  --color-text: #1d2421;
+  --color-text-muted: #5b6661;
+  --color-border: #dde3e0;
+  --color-danger: #b3261e;
+
+  /* Typografie */
+  --font-sans: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.75rem;
+  --line-height: 1.5;
+
+  /* Abstände und Formen */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2.5rem;
+  --radius: 0.5rem;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --max-width: 72rem;
+}
+
+/* ---------- Grundlagen ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height);
+  color: var(--color-text);
+  background: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+  margin: 0 0 var(--space-md);
+}
+
+h1 { font-size: var(--font-size-xl); }
+h2 { font-size: var(--font-size-lg); }
+h3 { font-size: var(--font-size-base); }
+
+p {
+  margin: 0 0 var(--space-md);
+}
+
+a {
+  color: var(--color-primary);
+}
+
+a:hover,
+a:focus-visible {
+  color: var(--color-primary-dark);
+}
+
+.muted {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+/* ---------- Seitenlayout: header / main / footer ---------- */
+.site-header {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.site-header__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.logo {
+  color: #fff;
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.logo:hover,
+.logo:focus-visible {
+  color: #fff;
+}
+
+.main-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.main-nav a {
+  display: block;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius);
+  color: #fff;
+  text-decoration: none;
+}
+
+.main-nav a:hover,
+.main-nav a:focus-visible,
+.main-nav a[aria-current="page"] {
+  background: var(--color-primary-dark);
+  color: #fff;
+}
+
+.main-nav .nav-admin {
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+main {
+  flex: 1;
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-lg) var(--space-md);
+}
+
+.site-footer {
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.site-footer__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.site-footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: var(--space-md);
+}
+
+/* ---------- Wiederverwendbare Bausteine ---------- */
+
+/* Karte: Rahmen für article/section-Inhalte */
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: var(--space-md);
+}
+
+/* Raster für Kartenlisten (Events, Mitglieder, Beiträge) */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: var(--space-md);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.section-header h2 {
+  margin: 0;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0 var(--space-sm);
+  border-radius: 999px;
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+}
+
+/* Buttons (auch für Links, die wie Buttons aussehen) */
+.button {
+  display: inline-block;
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius);
+  background: var(--color-primary);
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button:hover,
+.button:focus-visible {
+  background: var(--color-primary-dark);
+  color: #fff;
+}
+
+.button--secondary {
+  background: transparent;
+  color: var(--color-primary);
+}
+
+.button--secondary:hover,
+.button--secondary:focus-visible {
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+}
+
+.button--danger {
+  border-color: var(--color-danger);
+  background: var(--color-danger);
+}
+
+/* ---------- Formulare ---------- */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  max-width: 32rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.form-field label {
+  font-weight: 600;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  padding: var(--space-sm);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 1px;
+}
+
+.form-hint {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+/* ---------- Dashboard ---------- */
+.dashboard {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.welcome h1 {
+  margin-bottom: var(--space-xs);
+}
+
+/* Mini-Kalender: Monatsansicht als 7-spaltiges Grid */
+.calendar__weekdays,
+.calendar__days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--space-xs);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.calendar__weekdays {
+  margin-bottom: var(--space-xs);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+}
+
+.calendar__days li {
+  padding: var(--space-xs) 0;
+  border-radius: var(--radius);
+  font-size: var(--font-size-sm);
+}
+
+/* Der Monat beginnt am Donnerstag (1. Okt. 2026) */
+.calendar__days li:first-child {
+  grid-column-start: 4;
+}
+
+.calendar__days .is-today {
+  outline: 2px solid var(--color-primary);
+}
+
+.calendar__days .has-event a {
+  display: block;
+  border-radius: var(--radius);
+  background: var(--color-accent);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* Kompakte Liste kommender Events neben dem Kalender */
+.event-list {
+  list-style: none;
+  margin: var(--space-md) 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.event-list li {
+  display: flex;
+  gap: var(--space-md);
+  align-items: baseline;
+}
+
+.event-list time {
+  flex: 0 0 4.5rem;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+/* Beitrag zu einer vergangenen Veranstaltung */
+.post header {
+  margin-bottom: var(--space-sm);
+}
+
+.post h3 {
+  margin-bottom: var(--space-xs);
+}
+
+.post footer {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+/* ---------- Tablet (ab 48em ≈ 768px) ---------- */
+@media (min-width: 48em) {
+  .site-header__inner {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .site-footer__inner {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  main {
+    padding: var(--space-xl) var(--space-lg);
+  }
+
+  /* Dashboard: Kalender links, kommende Events rechts */
+  .dashboard__upcoming {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+    align-items: start;
+  }
+
+  .dashboard__upcoming .event-list {
+    margin-top: 0;
+  }
+}
+
+/* ---------- Desktop (ab 64em ≈ 1024px) ---------- */
+@media (min-width: 64em) {
+  :root {
+    --font-size-xl: 2rem;
+  }
+
+  /* Dashboard: Termine links, Beiträge rechts in breiterer Spalte */
+  .dashboard {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .dashboard .welcome {
+    grid-column: 1 / -1;
+  }
+
+  .dashboard__upcoming {
+    grid-template-columns: 1fr;
+  }
+}

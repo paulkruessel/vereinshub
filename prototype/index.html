@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard – Vereinshub</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="logo" href="/">Vereinshub</a>
+        <nav class="main-nav" aria-label="Hauptnavigation">
+          <ul>
+            <li><a href="/" aria-current="page">Dashboard</a></li>
+            <li><a href="/members/">Mitglieder</a></li>
+            <li><a href="/events/">Veranstaltungen</a></li>
+            <li><a href="/files/">Dateiablage</a></li>
+            <li><a href="/profile">Mein Profil</a></li>
+            <li><a class="nav-admin" href="/admin/">Verwaltung</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="dashboard">
+      <section class="welcome">
+        <h1>Hallo Paul!</h1>
+        <p class="muted">Willkommen zurück beim TSV Musterstadt e.V.</p>
+      </section>
+
+      <section class="card" aria-labelledby="upcoming-heading">
+        <div class="section-header">
+          <h2 id="upcoming-heading">Kommende Veranstaltungen</h2>
+          <a class="button" href="/events/new">Neue Veranstaltung</a>
+        </div>
+
+        <div class="dashboard__upcoming">
+          <div class="calendar">
+            <h3>Oktober 2026</h3>
+            <ol class="calendar__weekdays" aria-hidden="true">
+              <li>Mo</li><li>Di</li><li>Mi</li><li>Do</li><li>Fr</li><li>Sa</li><li>So</li>
+            </ol>
+            <ol class="calendar__days">
+              <li>1</li><li>2</li><li>3</li><li>4</li>
+              <li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>10</li><li>11</li>
+              <li>12</li><li>13</li><li>14</li><li>15</li><li>16</li><li>17</li><li>18</li>
+              <li>19</li><li>20</li><li class="is-today">21</li><li>22</li><li>23</li>
+              <li class="has-event"><a href="/events/herbstwanderung-2026">24</a></li><li>25</li>
+              <li>26</li><li>27</li><li>28</li><li>29</li>
+              <li class="has-event"><a href="/events/mitgliederversammlung-2026">30</a></li><li>31</li>
+            </ol>
+          </div>
+
+          <ul class="event-list">
+            <li>
+              <time datetime="2026-10-24T10:00">Sa, 24.10.</time>
+              <a href="/events/herbstwanderung-2026">Herbstwanderung zum Bodanrück</a>
+            </li>
+            <li>
+              <time datetime="2026-10-30T19:00">Fr, 30.10.</time>
+              <a href="/events/mitgliederversammlung-2026">Mitgliederversammlung 2026</a>
+            </li>
+            <li>
+              <time datetime="2026-11-14T18:00">Sa, 14.11.</time>
+              <a href="/events/laternenlauf-2026">Laternenlauf mit den Jugendgruppen</a>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section aria-labelledby="posts-heading">
+        <div class="section-header">
+          <h2 id="posts-heading">Beiträge zu vergangenen Veranstaltungen</h2>
+          <a href="/events/?status=past">Alle vergangenen</a>
+        </div>
+
+        <ul class="card-grid">
+          <li>
+            <article class="card post">
+              <header>
+                <h3><a href="/events/sommerfest-2026">Sommerfest 2026</a></h3>
+                <p class="muted">
+                  von <a href="/members/anna-schmidt">Anna Schmidt</a> ·
+                  <time datetime="2026-09-14">14.09.2026</time>
+                </p>
+              </header>
+              <p>Danke an alle Helferinnen und Helfer! Die Fotos liegen ab sofort in der Dateiablage.</p>
+              <footer>4 Kommentare</footer>
+            </article>
+          </li>
+          <li>
+            <article class="card post">
+              <header>
+                <h3><a href="/events/arbeitseinsatz-vereinsheim">Arbeitseinsatz Vereinsheim</a></h3>
+                <p class="muted">
+                  von <a href="/members/jonas-weber">Jonas Weber</a> ·
+                  <time datetime="2026-10-05">05.10.2026</time>
+                </p>
+              </header>
+              <p>Der Zaun ist gestrichen und die Hütte winterfest. Nächster Termin im Frühjahr.</p>
+              <footer>1 Kommentar</footer>
+            </article>
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <p>&copy; 2026 Vereinshub</p>
+        <ul>
+          <li><a href="/imprint">Impressum</a></li>
+          <li><a href="/privacy">Datenschutz</a></li>
+        </ul>
+      </div>
+    </footer>
+  </body>
+</html>
