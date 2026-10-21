@@ -1,0 +1,187 @@
+/* ==========================================================================
+   Vereinshub – Design-Tokens (Konzept „Abendrunde“)
+   Zwei Themes, dieselben Token-Namen:
+     - Dunkel ist Standard.
+     - Hell wird aktiv über [data-theme="light"] auf <html>
+       ODER (ohne JavaScript) über die angehakte Checkbox #theme-toggle.
+   Komponenten verwenden ausschließlich var(--…), nie feste Hex-Werte.
+   Schriften im <head> laden:
+   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Manrope:wght@400..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+   ========================================================================== */
+
+/* ---------- Theme-unabhängige Tokens ---------- */
+:root {
+  /* Schriften */
+  --font-display: "Bricolage Grotesque", system-ui, sans-serif;
+  --font-sans: "Manrope", system-ui, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* Schriftgrößen */
+  --text-xs: 0.75rem;     /* 12 */
+  --text-sm: 0.8125rem;   /* 13 */
+  --text-base: 0.9375rem; /* 15 */
+  --text-lg: 1.25rem;     /* 20 */
+  --text-xl: 1.875rem;    /* 30 */
+  --text-display: 3rem;   /* 48 */
+  --leading-tight: 1.1;
+  --leading-normal: 1.55;
+  --tracking-display: -0.035em;
+
+  /* Abstände (4-px-Raster) */
+  --space-1: 0.25rem;  /* 4 */
+  --space-2: 0.5rem;   /* 8 */
+  --space-3: 0.75rem;  /* 12 */
+  --space-4: 1rem;     /* 16 */
+  --space-5: 1.25rem;  /* 20 */
+  --space-6: 1.5rem;   /* 24 */
+  --space-7: 1.75rem;  /* 28 */
+  --space-10: 2.5rem;  /* 40 */
+
+  /* Radien */
+  --radius-control: 12px;
+  --radius-row: 16px;
+  --radius-tile: 24px;
+  --radius-pill: 999px;
+
+  /* Größen */
+  --control-height: 2.75rem; /* 44 px, Mindestgröße für Touch */
+  --sidebar-width: 14.5rem;
+  --tabbar-height: 5.25rem; /* 84 px, mobile Tab-Leiste */
+  --max-width: 70rem;
+
+  /* Schatten: nur für den schwebenden Button auf dem Handy */
+  --shadow-fab: 0 8px 24px rgba(11, 16, 32, 0.35);
+}
+
+/* ---------- Theme: Dunkel (Standard) ---------- */
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+  --color-bg: #0B1020;
+  --color-surface: #131A2E;
+  --color-surface-raised: #1A2340;
+  --color-surface-sunken: #0F1528;
+  --color-border: #1E2640;
+  --color-border-raised: #2C3863;
+  --color-border-strong: #3A4878;
+  --color-text: #E7EBF5;
+  --color-text-body: #D7DCEA;
+  --color-text-secondary: #B9C3DD;
+  --color-text-muted: #9AA4BF;
+  --color-text-faint: #7D88A6;
+  --color-primary: #7C9CFF;
+  --color-on-primary: #0B1020;
+  --color-link: #9DB4FF;
+  --color-link-hover: #C3D1FF;
+  --color-accent-text: #9DB4FF;
+  --color-primary-soft: #1E2A55;
+  --color-primary-soft-text: #B4C5FF;
+  --color-inverse-bg: #E7EBF5;
+  --color-inverse-text: #0B1020;
+  --color-chip-bg: #263152;
+  --color-chip-text: #E7EBF5;
+  --color-success-bg: #123524;
+  --color-success-text: #86EFAC;
+  --color-success-dot: #4ADE80;
+  --color-warning-bg: #3A2A0C;
+  --color-warning-text: #FCD58A;
+  --color-warning-dot: #FBBF24;
+  --color-danger-bg: #3D1518;
+  --color-danger-text: #FCA5A5;
+  --color-danger-dot: #F87171;
+  --color-violet-bg: #2B2350;
+  --color-violet-text: #D5C8FF;
+  --focus-ring: 0 0 0 3px #7C9CFF66;
+}
+
+/* ---------- Theme: Hell ---------- */
+[data-theme="light"],
+:root:has(#theme-toggle:checked) {
+  color-scheme: light;
+  --color-bg: #F4F6FB;
+  --color-surface: #FFFFFF;
+  --color-surface-raised: #EAF0FF;
+  --color-surface-sunken: #F4F6FB;
+  --color-border: #E3E8F2;
+  --color-border-raised: #CCD8FA;
+  --color-border-strong: #C3CCE0;
+  --color-text: #0E1430;
+  --color-text-body: #2A3150;
+  --color-text-secondary: #4A5373;
+  --color-text-muted: #5A6482;
+  --color-text-faint: #6B7491;
+  --color-primary: #3B5BDB;
+  --color-on-primary: #FFFFFF;
+  --color-link: #3B5BDB;
+  --color-link-hover: #2B45B8;
+  --color-accent-text: #3B5BDB;
+  --color-primary-soft: #E4EAFF;
+  --color-primary-soft-text: #2B45B8;
+  --color-inverse-bg: #0E1430;
+  --color-inverse-text: #FFFFFF;
+  --color-chip-bg: #EDF0F7;
+  --color-chip-text: #2A3150;
+  --color-success-bg: #E3F6EA;
+  --color-success-text: #166534;
+  --color-success-dot: #16A34A;
+  --color-warning-bg: #FDF1DA;
+  --color-warning-text: #8A4B06;
+  --color-warning-dot: #D97706;
+  --color-danger-bg: #FDE7E7;
+  --color-danger-text: #9F1C1C;
+  --color-danger-dot: #DC2626;
+  --color-violet-bg: #EEE8FF;
+  --color-violet-text: #5B3FB5;
+  --focus-ring: 0 0 0 3px #3B5BDB55;
+}
+
+/* ---------- Umschalter Hell/Dunkel (ohne JavaScript) ----------
+   Markup:
+   <div class="theme-switch">
+     <input type="checkbox" id="theme-toggle" class="theme-switch__input">
+     <label for="theme-toggle" class="theme-switch__label">
+       <span class="theme-switch__option theme-switch__option--light">Hell</span>
+       <span class="theme-switch__option theme-switch__option--dark">Dunkel</span>
+     </label>
+   </div>
+*/
+.theme-switch__input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.theme-switch__label {
+  display: inline-flex;
+  gap: 2px;
+  height: var(--control-height);
+  box-sizing: border-box;
+  padding: 3px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  cursor: pointer;
+}
+
+.theme-switch__option {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-pill);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  font-weight: 700;
+}
+
+/* Dunkel aktiv (Checkbox nicht angehakt) */
+.theme-switch__input:not(:checked) + .theme-switch__label .theme-switch__option--dark,
+/* Hell aktiv (Checkbox angehakt) */
+.theme-switch__input:checked + .theme-switch__label .theme-switch__option--light {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+.theme-switch__input:focus-visible + .theme-switch__label {
+  box-shadow: var(--focus-ring);
+}

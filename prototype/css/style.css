@@ -1,41 +1,9 @@
 /* ==========================================================================
-   Vereinshub – Prototyp (Meilenstein 1)
-   Mobile-first: Basis-Styles gelten für kleine Bildschirme,
-   Media Queries erweitern das Layout für Tablet und Desktop.
+   Vereinshub – Seitenlayout und seitenspezifische Styles
+   Mobile-first: Die Basis gilt für das Handy (Tab-Leiste unten,
+   schwebender Button). Ab 48em (768px) wird die Navigation zur
+   Seitenleiste links, ab 64em (1024px) wächst die Typografie.
    ========================================================================== */
-
-/* ---------- Design-Tokens ---------- */
-:root {
-  /* Farben */
-  --color-primary: #1f5f4a;
-  --color-primary-dark: #154536;
-  --color-primary-light: #e3f0eb;
-  --color-accent: #e08a2c;
-  --color-bg: #f6f7f5;
-  --color-surface: #ffffff;
-  --color-text: #1d2421;
-  --color-text-muted: #5b6661;
-  --color-border: #dde3e0;
-  --color-danger: #b3261e;
-
-  /* Typografie */
-  --font-sans: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --font-size-sm: 0.875rem;
-  --font-size-base: 1rem;
-  --font-size-lg: 1.25rem;
-  --font-size-xl: 1.75rem;
-  --line-height: 1.5;
-
-  /* Abstände und Formen */
-  --space-xs: 0.25rem;
-  --space-sm: 0.5rem;
-  --space-md: 1rem;
-  --space-lg: 1.5rem;
-  --space-xl: 2.5rem;
-  --radius: 0.5rem;
-  --shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-  --max-width: 72rem;
-}
 
 /* ---------- Grundlagen ---------- */
 *,
@@ -46,394 +14,608 @@
 
 body {
   margin: 0;
-  font-family: var(--font-sans);
-  font-size: var(--font-size-base);
-  line-height: var(--line-height);
-  color: var(--color-text);
-  background: var(--color-bg);
-  display: flex;
-  flex-direction: column;
   min-height: 100vh;
+  padding-bottom: calc(var(--tabbar-height) + var(--space-4));
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: 1.5;
 }
 
 h1,
 h2,
 h3 {
-  line-height: 1.2;
-  margin: 0 0 var(--space-md);
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
 }
 
-h1 { font-size: var(--font-size-xl); }
-h2 { font-size: var(--font-size-lg); }
-h3 { font-size: var(--font-size-base); }
-
 p {
-  margin: 0 0 var(--space-md);
+  margin: 0;
 }
 
 a {
-  color: var(--color-primary);
+  color: var(--color-link);
 }
 
 a:hover,
 a:focus-visible {
-  color: var(--color-primary-dark);
+  color: var(--color-link-hover);
 }
 
-.muted {
-  color: var(--color-text-muted);
-  font-size: var(--font-size-sm);
+/* Auf dem Handy nur für Screenreader, ab Tablet sichtbar */
+.sr-mobile {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }
 
-/* ---------- Seitenlayout: header / main / footer ---------- */
+/* ---------- Kopfbereich: Logo, Navigation, Profil ---------- */
 .site-header {
-  background: var(--color-primary);
-  color: #fff;
-}
-
-.site-header__inner {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: var(--space-md);
   display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
 }
 
 .logo {
-  color: #fff;
-  font-size: var(--font-size-lg);
-  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--color-text);
   text-decoration: none;
 }
 
-.logo:hover,
-.logo:focus-visible {
-  color: #fff;
+.logo:hover {
+  color: var(--color-text);
 }
 
-.main-nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.logo__mark {
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-sm);
-}
-
-.main-nav a {
-  display: block;
-  padding: var(--space-xs) var(--space-sm);
-  border-radius: var(--radius);
-  color: #fff;
-  text-decoration: none;
-}
-
-.main-nav a:hover,
-.main-nav a:focus-visible,
-.main-nav a[aria-current="page"] {
-  background: var(--color-primary-dark);
-  color: #fff;
-}
-
-.main-nav .nav-admin {
-  border: 1px solid rgba(255, 255, 255, 0.5);
-}
-
-main {
-  flex: 1;
-  width: 100%;
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: var(--space-lg) var(--space-md);
-}
-
-.site-footer {
-  background: var(--color-surface);
-  border-top: 1px solid var(--color-border);
-  color: var(--color-text-muted);
-  font-size: var(--font-size-sm);
-}
-
-.site-footer__inner {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: var(--space-md);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-sm);
-}
-
-.site-footer ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  gap: var(--space-md);
-}
-
-/* ---------- Wiederverwendbare Bausteine ---------- */
-
-/* Karte: Rahmen für article/section-Inhalte */
-.card {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: var(--space-md);
-}
-
-/* Raster für Kartenlisten (Events, Mitglieder, Beiträge) */
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
-  gap: var(--space-md);
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.section-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: var(--space-sm);
-  margin-bottom: var(--space-md);
-}
-
-.section-header h2 {
-  margin: 0;
-}
-
-.badge {
-  display: inline-block;
-  padding: 0 var(--space-sm);
-  border-radius: 999px;
-  background: var(--color-primary-light);
-  color: var(--color-primary-dark);
-  font-size: var(--font-size-sm);
-  font-weight: 600;
-}
-
-/* Buttons (auch für Links, die wie Buttons aussehen) */
-.button {
-  display: inline-block;
-  padding: var(--space-sm) var(--space-md);
-  border: 1px solid var(--color-primary);
-  border-radius: var(--radius);
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 11px;
   background: var(--color-primary);
-  color: #fff;
-  font: inherit;
-  font-weight: 600;
-  text-decoration: none;
-  cursor: pointer;
+  color: var(--color-on-primary);
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 800;
 }
 
-.button:hover,
-.button:focus-visible {
-  background: var(--color-primary-dark);
-  color: #fff;
+.logo__text {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
-.button--secondary {
-  background: transparent;
-  color: var(--color-primary);
-}
-
-.button--secondary:hover,
-.button--secondary:focus-visible {
-  background: var(--color-primary-light);
-  color: var(--color-primary-dark);
-}
-
-.button--danger {
-  border-color: var(--color-danger);
-  background: var(--color-danger);
-}
-
-/* ---------- Formulare ---------- */
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
-  max-width: 32rem;
-}
-
-.form-field {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-xs);
-}
-
-.form-field label {
-  font-weight: 600;
-}
-
-.form-field input,
-.form-field select,
-.form-field textarea {
-  padding: var(--space-sm);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
+/* Handy: Navigation als Tab-Leiste am unteren Rand */
+.main-nav {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  height: var(--tabbar-height);
+  padding: var(--space-2) var(--space-2) var(--space-5);
+  border-top: 1px solid var(--color-border);
   background: var(--color-surface);
+}
+
+.main-nav .vh-nav {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  height: 100%;
+  gap: 0;
+}
+
+.main-nav .vh-nav-item {
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-1);
+  height: 100%;
+  padding: 0;
+  font-size: 0.6875rem;
+}
+
+.main-nav .vh-nav-item,
+.main-nav .vh-nav-item:hover,
+.main-nav .vh-nav-item[aria-current="page"] {
+  background: transparent;
+}
+
+.main-nav .vh-nav-item[aria-current="page"] {
+  color: var(--color-accent-text);
+  font-weight: 700;
+}
+
+.main-nav .vh-icon {
+  width: 20px;
+  height: 20px;
+  padding: 5px 16px;
+  box-sizing: content-box;
+  border-radius: var(--radius-pill);
+}
+
+.main-nav .vh-nav-item[aria-current="page"] .vh-icon {
+  background: var(--color-primary-soft);
+}
+
+/* Profil: auf dem Handy nur der Avatar oben rechts */
+.profile-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.profile-card:hover {
+  color: var(--color-text);
+}
+
+.profile-card__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+
+.profile-card__name {
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.profile-card__club {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+/* ---------- Inhaltsbereich ---------- */
+main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  width: 100%;
+  max-width: calc(var(--max-width) + 2 * var(--space-10));
+  margin: 0 auto;
+  padding: 0 var(--space-5) var(--space-6);
+}
+
+/* Seitenkopf: Datum, Begrüßung, Aktionen */
+.page-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.page-header__title {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.page-header__date {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+.page-header h1 {
+  font-size: 2.125rem;
+  line-height: 1.05;
+  letter-spacing: var(--tracking-display);
+}
+
+.page-header__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Suchfeld als Pille mit Lupe */
+.search {
+  display: flex;
+  flex: 1 1 10rem;
+  align-items: center;
+  gap: var(--space-2);
+  height: var(--control-height);
+  padding: 0 var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+}
+
+.search:focus-within {
+  box-shadow: var(--focus-ring);
+}
+
+.search .vh-icon {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2;
+}
+
+.search input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
   color: var(--color-text);
   font: inherit;
+  font-size: 0.875rem;
 }
 
-.form-field input:focus,
-.form-field select:focus,
-.form-field textarea:focus {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 1px;
+/* Handy: "Neuer Termin" schwebt unten rechts über der Tab-Leiste */
+.new-event-btn {
+  position: fixed;
+  right: var(--space-5);
+  bottom: calc(var(--tabbar-height) + var(--space-4));
+  z-index: 10;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border-radius: 18px;
+  box-shadow: var(--shadow-fab);
 }
 
-.form-hint {
-  color: var(--color-text-muted);
-  font-size: var(--font-size-sm);
-}
-
-.form-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-sm);
+.new-event-btn .vh-icon {
+  width: 22px;
+  height: 22px;
 }
 
 /* ---------- Dashboard ---------- */
-.dashboard {
-  display: grid;
-  gap: var(--space-lg);
+
+/* Kacheln umbrechen automatisch, flex-basis steuert die Breite */
+.dashboard-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5);
 }
 
-.welcome h1 {
-  margin-bottom: var(--space-xs);
+.dashboard-grid > .next-event { flex: 2 1 32rem; }
+.dashboard-grid > .calendar { flex: 1 1 18rem; }
+.dashboard-grid > .upcoming { flex: 1 1 22rem; }
+.dashboard-grid > .posts { flex: 1.4 1 26rem; }
+
+/* Nächster Termin mit Countdown */
+.next-event {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-7);
 }
 
-/* Mini-Kalender: Monatsansicht als 7-spaltiges Grid */
+.next-event__countdown {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.next-event__countdown-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.next-event__body {
+  display: flex;
+  flex: 1 1 16rem;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.next-event__title {
+  font-size: 1.375rem;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.next-event__title a {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.next-event__title a:hover {
+  color: var(--color-link-hover);
+}
+
+.next-event__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  padding-top: var(--space-1);
+}
+
+/* Monatskalender: 7 Spalten, der 1. Oktober 2026 ist ein Donnerstag */
 .calendar__weekdays,
 .calendar__days {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: var(--space-xs);
-  list-style: none;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: var(--space-1);
   margin: 0;
   padding: 0;
+  list-style: none;
   text-align: center;
 }
 
 .calendar__weekdays {
-  margin-bottom: var(--space-xs);
-  color: var(--color-text-muted);
-  font-size: var(--font-size-sm);
-  font-weight: 600;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--color-text-faint);
+}
+
+.calendar__days {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
 }
 
 .calendar__days li {
-  padding: var(--space-xs) 0;
-  border-radius: var(--radius);
-  font-size: var(--font-size-sm);
+  color: var(--color-text-faint);
 }
 
-/* Der Monat beginnt am Donnerstag (1. Okt. 2026) */
 .calendar__days li:first-child {
   grid-column-start: 4;
 }
 
-.calendar__days .is-today {
-  outline: 2px solid var(--color-primary);
+/* Vergangene Tage blass, ab heute normale Textfarbe */
+.calendar__days .is-today ~ li {
+  color: var(--color-text);
 }
 
-.calendar__days .has-event a {
+.calendar__days li > * {
   display: block;
-  border-radius: var(--radius);
-  background: var(--color-accent);
-  color: #fff;
-  font-weight: 700;
+  padding: 6px 0;
+  border-radius: var(--radius-pill);
+}
+
+.calendar__days .is-today > * {
+  background: var(--color-inverse-bg);
+  color: var(--color-inverse-text);
+  font-weight: 500;
+}
+
+.calendar__days .has-event > a {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  font-weight: 500;
   text-decoration: none;
 }
 
-/* Kompakte Liste kommender Events neben dem Kalender */
-.event-list {
-  list-style: none;
-  margin: var(--space-md) 0 0;
-  padding: 0;
+.calendar__days .has-event > a:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.upcoming {
+  gap: var(--space-2);
+}
+
+.attend-form {
+  margin: 0;
+}
+
+/* Beiträge zu vergangenen Terminen */
+.post {
+  display: flex;
+  gap: 14px;
+}
+
+.post + .post {
+  padding-top: 14px;
+  border-top: 1px solid var(--color-border);
+}
+
+.post__body {
   display: flex;
   flex-direction: column;
-  gap: var(--space-sm);
+  gap: 6px;
+  min-width: 0;
 }
 
-.event-list li {
+.post__meta {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.post__author {
+  font-weight: 700;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.post__event {
+  text-decoration: none;
+}
+
+.post__meta time {
+  font-family: var(--font-mono);
+}
+
+.post__text {
+  line-height: var(--leading-normal);
+  color: var(--color-text-body);
+}
+
+.post__comments {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-decoration: none;
+}
+
+/* ---------- Fußbereich ---------- */
+.site-footer {
   display: flex;
-  gap: var(--space-md);
-  align-items: baseline;
-}
-
-.event-list time {
-  flex: 0 0 4.5rem;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-5);
+  max-width: calc(var(--max-width) + 2 * var(--space-10));
+  margin: 0 auto;
+  padding: var(--space-5);
+  font-size: var(--text-sm);
   color: var(--color-text-muted);
-  font-size: var(--font-size-sm);
 }
 
-/* Beitrag zu einer vergangenen Veranstaltung */
-.post header {
-  margin-bottom: var(--space-sm);
+.site-footer ul {
+  display: flex;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-.post h3 {
-  margin-bottom: var(--space-xs);
-}
-
-.post footer {
-  color: var(--color-text-muted);
-  font-size: var(--font-size-sm);
-}
-
-/* ---------- Tablet (ab 48em ≈ 768px) ---------- */
+/* ---------- Tablet und Desktop (ab 48em ≈ 768px) ---------- */
 @media (min-width: 48em) {
-  .site-header__inner {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+  /* Zweispaltiges Raster: Seitenleiste links, Inhalt und Footer rechts */
+  body {
+    display: grid;
+    grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
+    grid-template-rows: 1fr auto;
+    padding-bottom: 0;
   }
 
-  .site-footer__inner {
+  .site-header {
+    position: sticky;
+    top: 0;
+    grid-row: 1 / span 2;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: var(--space-7);
+    height: 100vh;
+    padding: var(--space-6) var(--space-4);
+    border-right: 1px solid var(--color-border);
+  }
+
+  .logo {
+    padding: 0 var(--space-2);
+  }
+
+  /* Navigation wird zur senkrechten Liste in der Seitenleiste */
+  .main-nav {
+    position: static;
+    height: auto;
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+
+  .main-nav .vh-nav {
+    display: flex;
+    gap: var(--space-1);
+  }
+
+  .main-nav .vh-nav-item {
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: var(--space-3);
+    height: var(--control-height);
+    padding: 0 14px;
+    font-size: 0.875rem;
+  }
+
+  .main-nav .vh-nav-item:hover {
+    background: var(--color-surface-sunken);
+  }
+
+  .main-nav .vh-nav-item[aria-current="page"] {
+    background: var(--color-surface-raised);
+    color: var(--color-text);
+    font-weight: 600;
+  }
+
+  .main-nav .vh-icon,
+  .main-nav .vh-nav-item[aria-current="page"] .vh-icon {
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    background: transparent;
+  }
+
+  /* Profil als Karte am unteren Ende der Seitenleiste */
+  .profile-card {
+    margin-top: auto;
+    padding: var(--space-3);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-row);
+    background: var(--color-surface);
+  }
+
+  .sr-mobile {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+
+  .nav-label--short {
+    display: none;
   }
 
   main {
-    padding: var(--space-xl) var(--space-lg);
+    gap: var(--space-7);
+    padding: var(--space-10) var(--space-10) var(--space-6);
   }
 
-  /* Dashboard: Kalender links, kommende Events rechts */
-  .dashboard__upcoming {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-lg);
-    align-items: start;
+  .site-footer {
+    width: 100%;
+    padding: var(--space-5) var(--space-10);
   }
 
-  .dashboard__upcoming .event-list {
-    margin-top: 0;
+  .page-header {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-5);
+  }
+
+  .search {
+    flex: 0 1 12rem;
+  }
+
+  /* "Neuer Termin" wird zum normalen Button im Seitenkopf */
+  .new-event-btn {
+    position: static;
+    width: auto;
+    height: var(--control-height);
+    padding: 0 18px;
+    border-radius: var(--radius-pill);
+    box-shadow: none;
+  }
+
+  .new-event-btn .vh-icon {
+    width: 16px;
+    height: 16px;
   }
 }
 
-/* ---------- Desktop (ab 64em ≈ 1024px) ---------- */
+/* ---------- Großer Desktop (ab 64em ≈ 1024px) ---------- */
 @media (min-width: 64em) {
-  :root {
-    --font-size-xl: 2rem;
+  .page-header h1 {
+    font-size: var(--text-display);
+    line-height: 1;
   }
 
-  /* Dashboard: Termine links, Beiträge rechts in breiterer Spalte */
-  .dashboard {
-    grid-template-columns: 1fr 1fr;
+  .vh-countdown {
+    font-size: 7.5rem;
   }
 
-  .dashboard .welcome {
-    grid-column: 1 / -1;
-  }
-
-  .dashboard__upcoming {
-    grid-template-columns: 1fr;
+  .next-event__title {
+    font-size: var(--text-xl);
   }
 }
