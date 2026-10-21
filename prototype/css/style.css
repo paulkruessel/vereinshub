@@ -653,3 +653,654 @@ main {
   color: var(--color-text-muted);
   font-size: var(--text-sm);
 }
+
+/* ==========================================================================
+   Seiten mit Liste/Kalender und Detail-Panel:
+   Mitglieder, Veranstaltungen, Dateiablage
+   Mobile-first: Auf dem Handy steht das Detail-Panel unter dem Inhalt,
+   ab 48em daneben.
+   ========================================================================== */
+
+/* ---------- Gemeinsam ---------- */
+
+/* Breitere Seite für Kalender und Dateiablage: <main class="main--wide"> */
+main.main--wide {
+  max-width: calc(var(--content-wide-max-width) + 2 * var(--space-10));
+}
+
+/* Inhalt + Detail-Panel nebeneinander, bricht auf schmalen Bildschirmen um
+   <div class="split"><section class="split__main">…</section><aside class="vh-detail split__side">…</aside></div> */
+.split {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--space-5);
+}
+
+.split__main {
+  flex: 1 1 30rem;
+  min-width: 0;
+}
+
+.split__side {
+  flex: 1 1 var(--detail-panel-width);
+  min-width: 0;
+}
+
+/* Werkzeugleiste unter dem Seitenkopf: Suche + Filter-Chips */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.toolbar .search {
+  flex: 1 1 100%;
+}
+
+/* Spaltenköpfe über Listen, erst ab Tablet sichtbar */
+.list-head {
+  display: none;
+}
+
+.list-head span {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+/* ---------- Mitglieder ---------- */
+
+.member-list {
+  gap: var(--space-1);
+  padding: var(--space-3);
+}
+
+/* Linker Teil einer Zeile: Avatar bzw. Dateisymbol + Name */
+.member-row__main,
+.file-row__main {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+/* Gruppe und Ort stehen auf dem Handy in der Meta-Zeile, ab Tablet in eigenen Spalten */
+.member-row__group,
+.member-row__city {
+  display: none;
+}
+
+.member-row__you {
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
+.member-row .vh-avatar {
+  width: 40px;
+  height: 40px;
+  font-size: var(--text-sm);
+}
+
+.member-row__empty {
+  font-size: var(--text-sm);
+  color: var(--color-text-faint);
+}
+
+.member-profile__head {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.member-profile__avatar.vh-avatar {
+  width: 72px;
+  height: 72px;
+  font-family: var(--font-display);
+  font-size: 1.625rem;
+}
+
+/* Kleine Zeile mit Datum und Titel, z. B. zugesagte Termine im Profil */
+.mini-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 10px var(--space-3);
+  border-radius: 14px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.mini-row time {
+  width: 2.75rem;
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+
+/* ---------- Veranstaltungen: großer Monatskalender ----------
+   <section class="vh-tile month-calendar">
+     <div class="month-calendar__head">…Titel, Pfeile, .vh-legend…</div>
+     <ol class="month-calendar__weekdays" aria-hidden="true"><li>Mo</li>…</ol>
+     <ol class="month-calendar__grid">
+       <li class="month-calendar__day is-outside"><span class="month-calendar__num">28</span></li>
+       <li class="month-calendar__day is-today"><span class="month-calendar__num">21</span>
+         <ul class="month-calendar__events">
+           <li><a class="month-calendar__event month-calendar__event--yes" href="…" aria-current="true">
+             <span class="month-calendar__dot"></span>
+             <span class="month-calendar__label"><time>10:00</time> Herbstwanderung</span>
+           </a></li>
+         </ul>
+       </li>
+     </ol>
+   </section>
+   Status: --yes (zugesagt), --open, --no (abgesagt), --past. Ausgewählt: aria-current="true". */
+.month-calendar {
+  gap: var(--space-4);
+  padding: var(--space-4);
+}
+
+.month-calendar__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.month-calendar__nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.month-calendar__title {
+  margin: 0 6px;
+  font-size: 1.125rem;
+  letter-spacing: -0.02em;
+}
+
+.month-calendar__weekdays,
+.month-calendar__grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: var(--space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.month-calendar__weekdays {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+}
+
+/* Handy: kleine Tagesfelder, Termine nur als Punkte */
+.month-calendar__day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  min-width: 0;
+  min-height: var(--control-height);
+  padding: 4px 2px;
+  border: 1px solid transparent;
+  border-radius: 14px;
+}
+
+.month-calendar__num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 26px;
+  height: 26px;
+  padding: 0 6px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.month-calendar__day.is-outside .month-calendar__num {
+  color: var(--color-text-faint);
+}
+
+.month-calendar__day.is-today .month-calendar__num {
+  background: var(--color-inverse-bg);
+  color: var(--color-inverse-text);
+}
+
+.month-calendar__events {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.month-calendar__event {
+  --dot: var(--color-text-faint);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 10px;
+  border-radius: 8px;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--color-text);
+}
+
+.month-calendar__event:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.month-calendar__dot {
+  width: 6px;
+  height: 6px;
+  flex-shrink: 0;
+  border-radius: var(--radius-pill);
+  background: var(--dot);
+}
+
+/* Auf dem Handy nur für Screenreader */
+.month-calendar__label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.month-calendar__label time {
+  font-family: var(--font-mono);
+  font-weight: 500;
+}
+
+.month-calendar__event--yes { --dot: var(--color-success-dot); --event-bg: var(--color-success-bg); --event-fg: var(--color-success-text); }
+.month-calendar__event--open { --dot: var(--color-warning-dot); --event-bg: var(--color-warning-bg); --event-fg: var(--color-warning-text); }
+.month-calendar__event--no { --dot: var(--color-danger-dot); --event-bg: var(--color-danger-bg); --event-fg: var(--color-danger-text); }
+.month-calendar__event--past { --dot: var(--color-text-faint); --event-bg: var(--color-chip-bg); --event-fg: var(--color-text-muted); }
+
+/* Termin-Detail */
+.event-detail__rsvp {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2);
+  margin: 0;
+}
+
+.event-detail__attendees {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.event-detail__attendees .vh-avatar {
+  width: 28px;
+  height: 28px;
+  font-size: 0.625rem;
+}
+
+.event-detail__desc {
+  line-height: var(--leading-normal);
+  color: var(--color-text-body);
+}
+
+/* ---------- Dateiablage ---------- */
+
+/* Ordnerliste links: auf dem Handy ausgeblendet, dort zeigen die Ordner-Kacheln den Weg */
+.folder-nav {
+  display: none;
+}
+
+.folder-nav__label {
+  padding: 14px var(--space-3) 6px;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.folder-nav .vh-nav-item {
+  padding: 0 var(--space-3);
+}
+
+.folder-nav__count {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.files-content {
+  gap: 14px;
+  padding: var(--space-4);
+}
+
+.files-content__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.files-content__head .search {
+  flex: 1 1 100%;
+  background: var(--color-surface-sunken);
+}
+
+.files-content__subtitle {
+  margin: var(--space-2) 0 0;
+  font-size: 1.0625rem;
+}
+
+/* Pfad: ‹ Alle Ordner / Versammlungen */
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.breadcrumb__back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  height: var(--control-height);
+  padding: 0 10px 0 4px;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.breadcrumb__sep {
+  color: var(--color-text-faint);
+}
+
+.breadcrumb__current {
+  margin: 0 0 0 6px;
+  font-size: 1.375rem;
+  letter-spacing: -0.01em;
+}
+
+.folder-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Datei-Zeile: auf dem Handy Name + Meta, ab Tablet mit Spalten */
+.file-row__by,
+.file-row__date,
+.file-row__size {
+  display: none;
+}
+
+.file-row__date,
+.file-row__size {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+}
+
+.file-row__size {
+  text-align: right;
+}
+
+.file-row__by.vh-avatar {
+  width: 28px;
+  height: 28px;
+  font-size: 0.625rem;
+}
+
+/* Schematische Vorschau im Detail-Panel */
+.file-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 10rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-row);
+  background: var(--color-surface);
+}
+
+.file-preview__page {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 92px;
+  height: 120px;
+  padding: 14px 12px;
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+}
+
+/* Textzeilen der Vorschau als Verlauf in der Textfarbe des Dateityps */
+.file-preview__page::before {
+  content: "";
+  height: 40px;
+  background: repeating-linear-gradient(to bottom, currentColor 0 4px, transparent 4px 11px);
+  opacity: 0.35;
+}
+
+.file-preview__page span {
+  align-self: flex-end;
+}
+
+/* ---------- Tablet und Desktop (ab 48em) ---------- */
+@media (min-width: 48em) {
+  .toolbar .search {
+    flex: 1 1 20rem;
+  }
+
+  .list-head {
+    display: grid;
+    gap: var(--space-4);
+    padding: var(--space-2) var(--space-3) 0;
+  }
+
+  /* Mitglieder: Name | Gruppe | Ort | Pfeil */
+  .member-list .list-head,
+  .member-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 8.75rem 6.875rem 20px;
+    gap: var(--space-4);
+  }
+
+  .member-row__main {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    min-width: 0;
+  }
+
+  .member-row__group,
+  .member-row__city {
+    display: block;
+  }
+
+  .member-row__city {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+  }
+
+  .member-row__meta-mobile {
+    display: none;
+  }
+
+  /* Kalender: große Tagesfelder mit beschrifteten Terminen */
+  .month-calendar {
+    padding: var(--space-6);
+  }
+
+  .month-calendar__title {
+    font-size: 1.625rem;
+  }
+
+  .month-calendar__weekdays,
+  .month-calendar__grid {
+    gap: 6px;
+  }
+
+  .month-calendar__weekdays {
+    padding: 0 var(--space-2);
+    font-size: var(--text-xs);
+    text-align: left;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+  }
+
+  .month-calendar__day {
+    align-items: stretch;
+    gap: var(--space-1);
+    min-height: var(--calendar-cell-height);
+    padding: var(--space-2);
+    border-color: var(--color-border);
+    background: var(--color-surface-sunken);
+  }
+
+  .month-calendar__day.is-outside {
+    border-color: transparent;
+    background: transparent;
+  }
+
+  .month-calendar__day.is-today {
+    border-color: var(--color-border-strong);
+  }
+
+  .month-calendar__num {
+    align-self: flex-start;
+  }
+
+  .month-calendar__event {
+    justify-content: flex-start;
+    min-height: 28px;
+    padding: 4px var(--space-2);
+    background: var(--event-bg, var(--color-chip-bg));
+    color: var(--event-fg, var(--color-text));
+  }
+
+  .month-calendar__event:hover {
+    color: var(--event-fg, var(--color-text));
+    filter: brightness(1.1);
+  }
+
+  .month-calendar__event[aria-current="true"] {
+    --dot: var(--color-on-primary);
+    background: var(--color-primary);
+    color: var(--color-on-primary);
+  }
+
+  /* Bis zu zwei Zeilen: erst die Uhrzeit, dann so viel vom Titel wie passt */
+  .month-calendar__label {
+    position: static;
+    display: -webkit-box;
+    width: auto;
+    height: auto;
+    min-width: 0;
+    overflow: hidden;
+    clip: auto;
+    line-height: 1.3;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .month-calendar__event {
+    align-items: flex-start;
+  }
+
+  .month-calendar__event .month-calendar__dot {
+    margin-top: 5px;
+  }
+
+  .split__side.event-detail {
+    flex: 0 1 23.75rem;
+    min-width: 18.75rem;
+  }
+
+  /* Dateiablage: Ordnerliste | Inhalt | Detail */
+  .folder-nav {
+    display: flex;
+    flex-direction: column;
+    flex: 0 1 var(--folder-nav-width);
+    gap: var(--space-1);
+    min-width: 12.5rem;
+    padding: var(--space-3);
+  }
+
+  .files-content {
+    flex: 1 1 28rem;
+    padding: var(--space-5);
+  }
+
+  .files-content__head .search {
+    flex: 0 1 15rem;
+  }
+
+  .folder-grid {
+    grid-template-columns: repeat(auto-fill, minmax(9.375rem, 1fr));
+  }
+
+  /* Datei: Name | Von | Datum | Größe */
+  .file-list .list-head,
+  .file-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 32px 5.25rem 4rem;
+    gap: 14px;
+  }
+
+  .file-row__main {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    min-width: 0;
+  }
+
+  .file-row__by,
+  .file-row__date,
+  .file-row__size {
+    display: block;
+  }
+
+  .file-row__by.vh-avatar {
+    display: inline-flex;
+  }
+
+  .split__side.file-detail {
+    flex: 0 1 var(--detail-panel-width);
+    min-width: 17.5rem;
+  }
+}

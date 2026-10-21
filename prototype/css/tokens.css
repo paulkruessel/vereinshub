@@ -49,6 +49,14 @@
   --tabbar-height: 5.25rem; /* 84 px, mobile Tab-Leiste */
   --max-width: 70rem;
 
+  /* Seitenlayouts: Mitglieder, Veranstaltungen, Dateiablage */
+  --content-wide-max-width: 77.5rem; /* 1240 px: Kalender und Dateiablage brauchen mehr Breite */
+  --detail-panel-width: 20rem;       /* 320 px: Detail-Panel rechts (Profil, Termin, Datei) */
+  --folder-nav-width: 13.75rem;      /* 220 px: Ordnerliste links in der Dateiablage */
+  --calendar-cell-height: 7rem;      /* 112 px: Tagesfeld im großen Monatskalender */
+  --list-row-height: 4.25rem;        /* 68 px: Mindesthöhe einer Listenzeile */
+  --file-icon-size: 2.5rem;          /* 40 px: Dateityp-Symbol und Ordner-Symbol */
+
   /* Schatten: nur für den schwebenden Button auf dem Handy */
   --shadow-fab: 0 8px 24px rgba(11, 16, 32, 0.35);
 }
