@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Anmelden - Vereinshub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Manrope:wght@400..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/tokens.css" />
+    <link rel="stylesheet" href="/css/components.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body class="auth-page">
+    <main class="auth">
+      <header class="auth__header">
+        <a class="logo" href="/">
+          <span class="logo__mark" aria-hidden="true">v</span>
+          <span class="logo__text">vereinshub</span>
+        </a>
+        <h1>Willkommen zurück</h1>
+        <p class="auth__intro">Melde dich mit deiner E-Mail-Adresse an.</p>
+        <form class="form" action="/login" method="post">
+          <div class="form-field">
+            <label for="email">E-Mail</label>
+            <input id="email" name="email" type="email" autocomplete="email" required />
+          </div>
+          <div class="form-field">
+            <label for="password">Passwort</label>
+            <input id="password" name="password" type="password" autocomplete="password" required />
+          </div>
+          <div class="form-check">
+            <input id="remember" name="remember" type="checkbox" />
+            <label for="remember">Angemeldet bleiben</label>
+          </div>
+        </form>
+        <p class="auth__note">Noch kein Konto? Neue Mitglieder erhalten einen Einladungslink von der Vereinsverwaltung.</p>
+      </header>
+    </main>
+    <footer>
+
+    </footer>
+  </body>
+</html>
