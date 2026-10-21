@@ -18,26 +18,34 @@
           <span class="logo__text">vereinshub</span>
         </a>
         <h1>Willkommen zurück</h1>
-        <p class="auth__intro">Melde dich mit deiner E-Mail-Adresse an.</p>
-        <form class="form" action="/login" method="post">
-          <div class="form-field">
-            <label for="email">E-Mail</label>
-            <input id="email" name="email" type="email" autocomplete="email" required />
-          </div>
-          <div class="form-field">
-            <label for="password">Passwort</label>
-            <input id="password" name="password" type="password" autocomplete="password" required />
-          </div>
-          <div class="form-check">
-            <input id="remember" name="remember" type="checkbox" />
-            <label for="remember">Angemeldet bleiben</label>
-          </div>
-        </form>
-        <p class="auth__note">Noch kein Konto? Neue Mitglieder erhalten einen Einladungslink von der Vereinsverwaltung.</p>
       </header>
+      <p class="auth__intro">Melde dich mit deiner E-Mail-Adresse an.</p>
+      <form class="form" action="/login" method="post">
+        <div class="form-field">
+          <label for="email">E-Mail</label>
+          <input id="email" name="email" type="email" autocomplete="email" required />
+        </div>
+        <div class="form-field">
+          <label for="password">Passwort</label>
+          <input id="password" name="password" type="password" autocomplete="current-password" required />
+        </div>
+        <div class="form-check">
+          <input id="remember" name="remember" type="checkbox" />
+          <label for="remember">Angemeldet bleiben</label>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="vh-btn">Anmelden</button>
+          <a href="/auth/reset-password/">Passwort vergessen?</a>
+        </div>
+      </form>
+      <p class="auth__note">Noch kein Konto? Neue Mitglieder erhalten einen Einladungslink von der Vereinsverwaltung.</p>
     </main>
-    <footer>
-
+    <footer class="site-footer">
+      <p>&copy; 2026 Vereinshub · TSV Musterstadt e.V.</p>
+      <ul>
+        <li><a href="/imprint">Impressum</a></li>
+        <li><a href="/privacy">Datenschutz</a></li>
+      </ul>      
     </footer>
   </body>
 </html>

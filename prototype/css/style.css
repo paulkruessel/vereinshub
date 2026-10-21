@@ -639,6 +639,12 @@ main {
   border-radius: var(--radius-tile);
 }
 
+.auth__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
 .auth__header h1 {
   font-size: 2rem;
   letter-spacing: var(--tracking-display);
@@ -652,6 +658,12 @@ main {
 .auth__note {
   color: var(--color-text-muted);
   font-size: var(--text-sm);
+}
+
+.auth-page .site-footer {
+  justify-content: center;
+  max-width: 26rem;
+  padding-inline: 0;
 }
 
 /* ==========================================================================
