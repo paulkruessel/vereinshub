@@ -466,6 +466,7 @@ main {
   padding: var(--space-5);
   font-size: var(--text-sm);
   color: var(--color-text-muted);
+  grid-column: 2;
 }
 
 .site-footer ul {
