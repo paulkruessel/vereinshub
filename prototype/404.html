@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Übersicht - Vereinshub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Manrope:wght@400..700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/tokens.css" />
+    <link rel="stylesheet" href="/css/components.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="logo" href="/">
+        <span class="logo__mark" aria-hidden="true">v</span>
+        <span class="logo__text">vereinshub</span>
+      </a>
+      <nav class="main-nav" aria-label="Hauptnavigation">
+        <ul class="vh-nav">
+          <li>
+            <a class="vh-nav-item" href="/"
+              ><svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg>Übersicht</a
+            >
+          </li>
+          <li>
+            <a class="vh-nav-item" href="/members/"
+              ><svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M16 19v-1a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v1"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path
+                  d="M22 19v-1a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"
+                ></path></svg>Mitglieder</a
+            >
+          </li>
+          <li>
+            <a class="vh-nav-item" href="/events/"
+              ><svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3" y="5" width="18" height="16" rx="3"></rect>
+                <path d="M16 3v4M8 3v4M3 11h18"></path></svg><span class="sr-mobile">Veranstaltungen</span
+              ><span class="nav-label--short" aria-hidden="true"
+                >Termine</span
+              ></a
+            >
+          </li>
+          <li>
+            <a class="vh-nav-item" href="/files/"
+              ><svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"
+                ></path></svg><span class="sr-mobile">Dateiablage</span
+              ><span class="nav-label--short" aria-hidden="true"
+                >Dateien</span
+              ></a
+            >
+          </li>
+          <li>
+            <a class="vh-nav-item" href="/admin/"
+              ><svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M12 3l8 4v5c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V7z"
+                /></svg>Verwaltung</a
+            >
+          </li>
+        </ul>
+      </nav>
+      <a class="profile-card" href="/profile">
+        <span class="vh-avatar vh-avatar--violet" aria-hidden="true">PK</span>
+        <span class="profile-card__text sr-mobile">
+          <span class="profile-card__name">Paul Krüssel</span>
+          <span class="profile-card__club">TSV Musterstadt e.V.</span>
+        </span>
+      </a>
+    </header>
+    <main class="error-page">
+      <div class="error">
+        <div class="error__digits" aria-hidden="true">
+          <div class="error__digit">
+            <span class="error__weekday">Mo</span>
+            <span class="error__number">4</span>
+          </div>
+          <div class="error__digit">
+            <span class="error__weekday">Di</span>
+            <span class="error__number">0</span>
+          </div>
+          <div class="error__digit">
+            <span class="error__weekday">Mi</span>
+            <span class="error__number">4</span>
+          </div>
+        </div>
+
+        <header class="error__intro">
+          <p class="error__code">Fehler 404</p>
+          <h1 class="error__title">Diese Seite steht nicht im Kalender.</h1>
+          <p class="error__lead">
+            Vielleicht wurde der Termin oder die Datei gelöscht, oder der Link
+            hat einen Tippfehler. Von hier kommst du schnell weiter.
+          </p>
+        </header>
+
+        <div class="error__actions">
+          <a class="vh-btn" href="/"><svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg>Zur Übersicht</a>
+        </div>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <p>&copy; 2026 Vereinshub · TSV Musterstadt e.V.</p>
+      <ul>
+        <li><a href="/imprint">Impressum</a></li>
+        <li><a href="/privacy">Datenschutz</a></li>
+      </ul>
+    </footer>
+  </body>
+</html>
