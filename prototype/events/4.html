@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sommerfest 2026 - Vereinshub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Manrope:wght@400..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/tokens.css" />
+    <link rel="stylesheet" href="/css/components.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="logo" href="/">
+        <span class="logo__mark" aria-hidden="true">v</span>
+        <span class="logo__text">vereinshub</span>
+      </a>
+      <nav class="main-nav" aria-label="Hauptnavigation">
+        <ul class="vh-nav">
+          <li><a class="vh-nav-item" href="/"><svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg>Übersicht</a></li>
+          <li><a class="vh-nav-item" href="/members/"><svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 19v-1a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v1"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 19v-1a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"></path></svg>Mitglieder</a></li>
+          <li><a class="vh-nav-item" href="/events/" aria-current="page"><svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"></rect><path d="M16 3v4M8 3v4M3 11h18"></path></svg><span class="sr-mobile">Veranstaltungen</span><span class="nav-label--short" aria-hidden="true">Termine</span></a></li>
+          <li><a class="vh-nav-item" href="/files/"><svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg><span class="sr-mobile">Dateiablage</span><span class="nav-label--short" aria-hidden="true">Dateien</span></a></li>
+          <li><a class="vh-nav-item" href="/admin/"><svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4v5c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V7z"/></svg>Verwaltung</a></li>
+        </ul>
+      </nav>
+      <a class="profile-card" href="/profile">
+        <span class="vh-avatar vh-avatar--violet" aria-hidden="true">PK</span>
+        <span class="profile-card__text sr-mobile">
+          <span class="profile-card__name">Paul Krüssel</span>
+          <span class="profile-card__club">TSV Musterstadt e.V.</span>
+        </span>
+      </a>
+    </header>
+    <main class="main--wide">
+      <header class="page-header">
+        <div class="page-header__title">
+          <p class="page-header__date">1 Termin im September</p>
+          <h1>Veranstaltungen</h1>
+        </div>
+        <div class="page-header__actions">
+          <div class="theme-switch">
+            <input class="theme-switch__input" type="checkbox" id="theme-toggle">
+            <label for="theme-toggle" class="theme-switch__label">
+              <span class="vh-sr">Hellen Modus aktivieren</span>
+              <span class="theme-switch__option theme-switch__option--light" aria-hidden="true"><svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></span>
+              <span class="theme-switch__option theme-switch__option--dark" aria-hidden="true"><svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"></path></svg></span>
+            </label>
+          </div>
+          <a class="vh-btn new-event-btn" href="/events/new">
+            <svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+            <span class="sr-mobile">Neuer Termin</span>
+          </a>
+        </div>
+      </header>
+        <div class="split">
+          <section class="vh-tile month-calendar split__main" aria-labelledby="calendar-title">
+            <div class="month-calendar__head">
+              <div class="month-calendar__nav">
+                <a class="vh-btn vh-btn--ghost vh-btn--icon" href="/events/?month=2026-08" aria-label="Vorheriger Monat"><svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></a>
+                <h2 class="month-calendar__title" id="calendar-title">September 2026</h2>
+                <a class="vh-btn vh-btn--ghost vh-btn--icon" href="/events/?month=2026-10" aria-label="Nächster Monat"><svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></a>
+              </div>
+              <ul class="vh-legend">
+                <li><span class="vh-status-dot vh-status-dot--yes"></span>Zugesagt</li>
+                <li><span class="vh-status-dot vh-status-dot--open"></span>Offen</li>
+                <li><span class="vh-status-dot vh-status-dot--no"></span>Abgesagt</li>
+                <li><span class="vh-status-dot vh-status-dot--past"></span>Vergangen</li>
+              </ul>
+            </div>
+            <ol class="month-calendar__weekdays" aria-hidden="true">
+              <li>Mo</li>
+              <li>Di</li>
+              <li>Mi</li>
+              <li>Do</li>
+              <li>Fr</li>
+              <li>Sa</li>
+              <li>So</li>
+            </ol>
+            <ol class="month-calendar__grid">
+              <li class="month-calendar__day is-outside"><span class="month-calendar__num">31</span></li>
+              <li class="month-calendar__day"><span class="month-calendar__num">1</span></li>
+              <li class="month-calendar__day"><span class="month-calendar__num">2</span></li>
+              <li class="month-calendar__day"><span class="month-calendar__num">3</span></li>
+              <li class="month-calendar__day"><span class="month-calendar__num">4</span></li>
+              <li class="month-calendar__day"><span class="month-calendar__num">5</span></li>
+              <li class="month-calendar__day"><span class="month-calendar__num">6</span></li>
+              <li class="month-calendar__day"><span class="month-calendar__num">7</span></li>
+              <li class="month-calendar__day"><span class="month-calendar__num">8</span></li>
+              <li class="month-calendar__day"><span class="month-calendar__num">9</span></li>
+              <li class="month-calendar__day"><span class="month-calendar__num">10</span></li>
+              <li class="month-calendar__day"><span class="month-calendar__num">11</span></li>
+              <li class="month-calendar__day">
+                <span class="month-calendar__num">12</span>
+                <ul class="month-calendar__events">
+                  <li>
+                    <a class="month-calendar__event month-calendar__event--past" href="/events/4" aria-current="true">
+                      <span class="month-calendar__dot"></span>
+                      <span class="month-calendar__label"><time datetime="2026-09-12T14:00">14:00</time> Sommerfest</span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="month-calendar__day"><span class="month-calendar__num">13</span></li>
+              <li class="month-calendar__day"><span class="month-calendar__num">14</span></li>
+              <li class="month-calendar__day"><span class="month-calendar__num">15</span></li>
+              <li class="month-calendar__day"><span class="month-calendar__num">16</span></li>
+              <li class="month-calendar__day"><span class="month-calendar__num">17</span></li>
+              <li class="month-calendar__day"><span class="month-calendar__num">18</span></li>
+              <li class="month-calendar__day"><span class="month-calendar__num">19</span></li>
+              <li class="month-calendar__day"><span class="month-calendar__num">20</span></li>
+              <li class="month-calendar__day"><span class="month-calendar__num">21</span></li>
+              <li class="month-calendar__day"><span class="month-calendar__num">22</span></li>
+              <li class="month-calendar__day"><span class="month-calendar__num">23</span></li>
+              <li class="month-calendar__day"><span class="month-calendar__num">24</span></li>
+              <li class="month-calendar__day"><span class="month-calendar__num">25</span></li>
+              <li class="month-calendar__day"><span class="month-calendar__num">26</span></li>
+              <li class="month-calendar__day"><span class="month-calendar__num">27</span></li>
+              <li class="month-calendar__day"><span class="month-calendar__num">28</span></li>
+              <li class="month-calendar__day"><span class="month-calendar__num">29</span></li>
+              <li class="month-calendar__day"><span class="month-calendar__num">30</span></li>
+              <li class="month-calendar__day is-outside"><span class="month-calendar__num">1</span></li>
+              <li class="month-calendar__day is-outside"><span class="month-calendar__num">2</span></li>
+              <li class="month-calendar__day is-outside"><span class="month-calendar__num">3</span></li>
+              <li class="month-calendar__day is-outside"><span class="month-calendar__num">4</span></li>
+            </ol>
+        </section>
+        <article class="vh-detail split__side event-detail" aria-labelledby="event-title">
+          <div class="vh-detail__top">
+            <span class="vh-badge vh-badge--sm"><span class="vh-badge__dot"></span>Vergangen</span>
+            <a class="vh-btn vh-btn--ghost vh-btn--icon vh-detail__close" href="/events/" aria-label="Details schließen">
+              <svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+            </a>
+          </div>
+          <div class="vh-detail__heading">
+            <time class="vh-detail__eyebrow" datetime="2026-09-12">Samstag, 12. September 2026</time>
+            <h2 class="vh-detail__title" id="event-title">Sommerfest 2026</h2>
+          </div>
+          <dl class="vh-dl vh-dl--icons">
+            <div>
+              <dt><svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg><span class="vh-sr">Uhrzeit</span></dt>
+              <dd>14:00 - 22:00 Uhr</dd>
+            </div>
+            <div>
+              <dt><svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"></path><circle cx="12" cy="10" r="2.5"></circle></svg><span class="vh-sr">Treffpunkt</span></dt>
+              <dd>Vereinsgelände</dd>
+            </div>
+            <div>
+              <dt><svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 19v-1a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v1"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 19v-1a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"></path></svg><span class="vh-sr">Eingeladen</span></dt>
+              <dd>Eingeladen: Alle Mitglieder und Gäste</dd>
+            </div>
+            <div>
+              <dt><span class="vh-avatar vh-avatar--sm vh-avatar--green" aria-hidden="true">AS</span><span class="vh-sr">Organisation</span></dt>
+              <dd>Organisiert von <a href="/members/1">Anna Schmidt</a></dd>
+            </div>
+          </dl>
+          <p class="event-detail__desc">Grillen, Kinderspiele und Livemusik auf dem Vereinsgelände. Salate und Kuchen wurden über die Liste in der Dateiablage abgesprochen.</p>
+          <section class="vh-detail__section" aria-label="Zusagen">
+            <p class="event-detail__attendees">
+              <span>23 waren dabei</span>
+              <span class="vh-avatar-stack">
+                <span class="vh-avatar vh-avatar--green" title="Anna Schmidt">AS</span>
+                <span class="vh-avatar" title="Jonas Weber">JW</span>
+                <span class="vh-avatar vh-avatar--green" title="Mehmet Yılmaz">MY</span>
+              </span>
+            </p>
+            <a class="vh-btn vh-btn--quiet vh-btn--block" href="/files/">Beitrag und Fotos ansehen</a>
+          </section>
+          <section class="vh-detail__section" id="comments" aria-labelledby="comments-title">
+            <h3 class="vh-detail__label" id="comments-title">Kommentare</h3>
+            <article class="vh-comment">
+              <span class="vh-avatar vh-avatar--sm vh-avatar--green" aria-hidden="true">AS</span>
+              <div class="vh-comment__body">
+                <p class="vh-comment__meta"><a class="vh-comment__author" href="/members/1">Anna Schmidt</a> · <time datetime="2026-09-14T10:00">14.09.</time></p>
+                <p class="vh-comment__text">Danke an alle Helferinnen und Helfer! Die Fotos liegen ab sofort in der Dateiablage.</p>
+              </div>
+            </article>
+            <article class="vh-comment">
+              <span class="vh-avatar vh-avatar--sm vh-avatar--green" aria-hidden="true">MY</span>
+              <div class="vh-comment__body">
+                <p class="vh-comment__meta"><a class="vh-comment__author" href="/members/5">Mehmet Yılmaz</a> · <time datetime="2026-09-14T19:30">14.09.</time></p>
+                <p class="vh-comment__text">War ein toller Tag, gerne wieder.</p>
+              </div>
+            </article>
+            <form action="/events/4/comments" method="post">
+              <label for="comment-text" class="vh-sr">Kommentar schreiben</label>
+              <input class="vh-input-pill" id="comment-text" name="text" type="text" placeholder="Kommentar schreiben ..." required />
+              <button type="submit" class="vh-sr">Senden</button>
+            </form>
+          </section>
+        </article>
+      </div>
+      </main>
+      <footer class="site-footer">
+        <p>&copy; 2026 Vereinshub · TSV Musterstadt e.V.</p>
+        <ul>
+          <li><a href="/imprint">Impressum</a></li>
+          <li><a href="/privacy">Datenschutz</a></li>
+      </ul>
+    </footer>
+  </body>
+</html>
