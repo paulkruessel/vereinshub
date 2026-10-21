@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Veranstaltungen - Vereinshub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Manrope:wght@400..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/tokens.css" />
+    <link rel="stylesheet" href="/css/components.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="logo" href="/">
+        <span class="logo__mark" aria-hidden="true">v</span>
+        <span class="logo__text">vereinshub</span>
+      </a>
+      <nav class="main-nav" aria-label="Hauptnavigation">
+        <ul class="vh-nav">
+          <li><a class="vh-nav-item" href="/"><svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg>Übersicht</a></li>
+          <li><a class="vh-nav-item" href="/members/"><svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 19v-1a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v1"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 19v-1a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"></path></svg>Mitglieder</a></li>
+          <li><a class="vh-nav-item" href="/events/" aria-current="page"><svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"></rect><path d="M16 3v4M8 3v4M3 11h18"></path></svg><span class="sr-mobile">Veranstaltungen</span><span class="nav-label--short" aria-hidden="true">Termine</span></a></li>
+          <li><a class="vh-nav-item" href="/files/"><svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg><span class="sr-mobile">Dateiablage</span><span class="nav-label--short" aria-hidden="true">Dateien</span></a></li>
+          <li><a class="vh-nav-item" href="/admin/"><svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4v5c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V7z"/></svg>Verwaltung</a></li>
+        </ul>
+      </nav>
+      <a class="profile-card" href="/profile">
+        <span class="vh-avatar vh-avatar--violet" aria-hidden="true">PK</span>
+        <span class="profile-card__text sr-mobile">
+          <span class="profile-card__name">Paul Krüssel</span>
+          <span class="profile-card__club">TSV Musterstadt e.V.</span>
+        </span>
+      </a>
+    </header>
+    <main class="main--wide">
+      <header class="page-header">
+        <div class="page-header__title">
+          <p class="page-header__date">4 Termine im Oktober</p>
+          <h1>Veranstaltungen</h1>
+        </div>
+        <div class="page-header__actions">
+          <div class="theme-switch">
+            <input class="theme-switch__input" type="checkbox" id="theme-toggle">
+            <label for="theme-toggle" class="theme-switch__label">
+              <span class="vh-sr">Hellen Modus aktivieren</span>
+              <span class="theme-switch__option theme-switch__option--light" aria-hidden="true"><svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></span>
+              <span class="theme-switch__option theme-switch__option--dark" aria-hidden="true"><svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"></path></svg></span>
+            </label>
+          </div>
+          <a class="vh-btn new-event-btn" href="/events/new">
+            <svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+            <span class="sr-mobile">Neuer Termin</span>
+          </a>
+        </div>
+      </header>
+      <div class="dashboard-grid">
+        <section class="vh-tile month-calendar" aria-labelledby="calendar-title">
+          <div class="month-calendar__head">
+            <div class="month-calendar__nav">
+              <a class="vh-btn vh-btn--ghost vh-btn--icon" href="/events/?month=2026-09" aria-label="Vorheriger Monat"><svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></a>
+              <h2 class="month-calendar__title" id="calendar-title">Oktober 2026</h2>
+              <a class="vh-btn vh-btn--ghost vh-btn--icon" href="/events/?month=2026-11" aria-label="Nächster Monat"><svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></a>
+            </div>
+            <ul class="vh-legend">
+              <li><span class="vh-status-dot vh-status-dot--yes"></span>Zugesagt</li>
+              <li><span class="vh-status-dot vh-status-dot--open"></span>Offen</li>
+              <li><span class="vh-status-dot vh-status-dot--no"></span>Abgesagt</li>
+              <li><span class="vh-status-dot vh-status-dot--past"></span>Vergangen</li>
+            </ul>
+          </div>
+          <ol class="month-calendar__weekdays" aria-hidden="true">
+            <li>Mo</li>
+            <li>Di</li>
+            <li>Mi</li>
+            <li>Do</li>
+            <li>Fr</li>
+            <li>Sa</li>
+            <li>So</li>
+          </ol>
+          <ol class="month-calendar__grid">
+            <li class="month-calendar__day is-outside"><span class="month-calendar__num">28</span></li>
+            <li class="month-calendar__day is-outside"><span class="month-calendar__num">29</span></li>
+            <li class="month-calendar__day is-outside"><span class="month-calendar__num">30</span></li>
+            <li class="month-calendar__day"><span class="month-calendar__num">1</span></li>
+            <li class="month-calendar__day"><span class="month-calendar__num">2</span></li>
+            <li class="month-calendar__day"><span class="month-calendar__num">3</span></li>
+            <li class="month-calendar__day"><span class="month-calendar__num">4</span></li>
+            <li class="month-calendar__day">
+              <span class="month-calendar__num">5</span>
+              <span class="month-calendar__events">
+                <ul class="month-calendar__events">
+                  <li>
+                    <a class="month-calendar__event month-calendar__event--past" href="/events/5">
+                      <span class="month-calendar__dot"></span>
+                      <span class="month-calendar__label"><time datetime="2026-10-05T09:00">09:00</time> Arbeitseinsatz</span>
+                    </a>
+                  </li>
+                </ul>
+              </span>
+            </li>
+            <li class="month-calendar__day"><span class="month-calendar__num">6</span></li>
+            <li class="month-calendar__day"><span class="month-calendar__num">7</span></li>
+            <li class="month-calendar__day"><span class="month-calendar__num">8</span></li>
+            <li class="month-calendar__day"><span class="month-calendar__num">9</span></li>
+            <li class="month-calendar__day"><span class="month-calendar__num">10</span></li>
+            <li class="month-calendar__day"><span class="month-calendar__num">11</span></li>
+            <li class="month-calendar__day"><span class="month-calendar__num">12</span></li>
+            <li class="month-calendar__day"><span class="month-calendar__num">13</span></li>
+            <li class="month-calendar__day"><span class="month-calendar__num">14</span></li>
+            <li class="month-calendar__day"><span class="month-calendar__num">15</span></li>
+            <li class="month-calendar__day"><span class="month-calendar__num">16</span></li>
+            <li class="month-calendar__day"><span class="month-calendar__num">17</span></li>
+            <li class="month-calendar__day"><span class="month-calendar__num">18</span></li>
+            <li class="month-calendar__day"><span class="month-calendar__num">19</span></li>
+            <li class="month-calendar__day"><span class="month-calendar__num">20</span></li>
+            <li class="month-calendar__day is-today"><span class="month-calendar__num" aria-current="date">21</span></li>
+            <li class="month-calendar__day"><span class="month-calendar__num">22</span></li>
+            <li class="month-calendar__day"><span class="month-calendar__num">23</span></li>
+            <li class="month-calendar__day">
+              <span class="month-calendar__num">24</span>
+              <span class="month-calendar__events">
+                <ul class="month-calendar__events">
+                  <li>
+                    <a class="month-calendar__event month-calendar__event--yes" href="/events/1">
+                      <span class="month-calendar__dot"></span>
+                      <span class="month-calendar__label"><time datetime="2026-10-24T10:00">10:00</time> Herbstwanderung</span>
+                    </a>
+                  </li>
+                </ul>
+              </span>
+            </li>
+            <li class="month-calendar__day"><span class="month-calendar__num">25</span></li>
+            <li class="month-calendar__day"><span class="month-calendar__num">26</span></li>
+            <li class="month-calendar__day">
+              <span class="month-calendar__num">27</span>
+              <span class="month-calendar__events">
+                <ul class="month-calendar__events">
+                  <li>
+                    <a class="month-calendar__event month-calendar__event--no" href="/events/6">
+                      <span class="month-calendar__dot"></span>
+                      <span class="month-calendar__label"><time datetime="2026-10-27T18:00">18:00</time> Hallenputz</span>
+                    </a>
+                  </li>
+                </ul>
+              </span>
+            </li>
+            <li class="month-calendar__day"><span class="month-calendar__num">28</span></li>
+            <li class="month-calendar__day"><span class="month-calendar__num">29</span></li>
+            <li class="month-calendar__day">
+              <span class="month-calendar__num">30</span>
+              <span class="month-calendar__events">
+                <ul class="month-calendar__events">
+                  <li>
+                    <a class="month-calendar__event month-calendar__event--open" href="/events/2">
+                      <span class="month-calendar__dot"></span>
+                      <span class="month-calendar__label"><time datetime="2026-10-30T19:00">19:00</time> Mitgliederversammlung</span>
+                    </a>
+                  </li>
+                </ul>
+              </span>
+            </li>
+            <li class="month-calendar__day"><span class="month-calendar__num">31</span></li>
+            <li class="month-calendar__day is-outside"><span class="month-calendar__num">1</span></li>
+          </ol>
+        </section>
+    </main>
+    <footer class="site-footer">
+      <p>&copy; 2026 Vereinshub · TSV Musterstadt e.V.</p>
+      <ul>
+        <li><a href="/imprint">Impressum</a></li>
+        <li><a href="/privacy">Datenschutz</a></li>
+      </ul>
+    </footer>
+  </body>
+</html>
