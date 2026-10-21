@@ -1,75 +1,12 @@
-# React + TypeScript + Vite
+# Vereinshub
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Diese Web-App ist für Vereine ausgelegt, um ihre Mitglieder zu organisieren und Veranstaltungen zu planen.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
-
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
+- Login und Registrierung: Nutzer können sich mit Nutzername/E-Mail und Passwort einloggen und bei Bedarf einen Link zur Registrierung an neue Nutzer versenden.
+- Mitgliederliste: Die Mitglieder des Vereins können sich ein eigenes Profil mit Namen, Kontaktinfos und Adressen erstellen und über eine Suche Infos anderer Mitglieder finden
+- Veranstaltungsplaner: Vereinsmitglieder können Veranstaltungen mit Titel, Ort und Zeit anlegen und andere Mitglieder dazu einladen. Andere Mitglieder können sich dann per Knopfdruck anmelden und zudem in einer Diskussionssektion zum Event eigene Kommentare verfassen.
+- Dateiablage: Mitglieder können in einer Dateiablage wichtige Dokumente, z.B. Protokolle vorheriger Mitgliederversammlungen hochladen und anderen Mitgliedern zur Verfügung zu stellen
+- Dashboard: Die Startseite, wenn man die App öffnet: Ein angemeldetes Mitglied kann in einem kleinen Kalender kommende Veranstaltugnen sehen und gepostete Beiträge zu vergangenen Veranstaltungen sehen
+- Bonus: E-Mail-Newsletter: Nutzer können regelmäßig per E-Mail eine Zusammenfassung kommender und vergangener Veranstaltungen sehen.
