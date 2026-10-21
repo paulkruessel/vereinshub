@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lena Hoffmann - Vereinshub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Manrope:wght@400..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/tokens.css" />
+    <link rel="stylesheet" href="/css/components.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="logo" href="/">
+        <span class="logo__mark" aria-hidden="true">v</span>
+        <span class="logo__text">vereinshub</span>
+      </a>
+      <nav class="main-nav" aria-label="Hauptnavigation">
+        <ul class="vh-nav">
+          <li><a class="vh-nav-item" href="/"><svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg>Übersicht</a></li>
+          <li><a class="vh-nav-item" href="/members/" aria-current="page"><svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 19v-1a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v1"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 19v-1a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"></path></svg>Mitglieder</a></li>
+          <li><a class="vh-nav-item" href="/events/"><svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"></rect><path d="M16 3v4M8 3v4M3 11h18"></path></svg><span class="sr-mobile">Veranstaltungen</span><span class="nav-label--short" aria-hidden="true">Termine</span></a></li>
+          <li><a class="vh-nav-item" href="/files/"><svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg><span class="sr-mobile">Dateiablage</span><span class="nav-label--short" aria-hidden="true">Dateien</span></a></li>
+          <li><a class="vh-nav-item" href="/admin/"><svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4v5c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V7z"/></svg>Verwaltung</a></li>
+        </ul>
+      </nav>
+      <a class="profile-card" href="/profile">
+        <span class="vh-avatar vh-avatar--violet" aria-hidden="true">PK</span>
+        <span class="profile-card__text sr-mobile">
+          <span class="profile-card__name">Paul Krüssel</span>
+          <span class="profile-card__club">TSV Musterstadt e.V.</span>
+        </span>
+      </a>
+    </header>
+    <main class="main--wide">
+      <header class="page-header">
+        <div class="page-header__title">
+          <p class="page-header__date">
+            <time datetime="2026-10-21">6 Mitglieder · TSV Musterstadt e.V.</time>
+          </p>
+          <h1>Mitglieder</h1>
+        </div>
+        <div class="page-header__actions">
+          <div class="theme-switch">
+            <input class="theme-switch__input" type="checkbox" id="theme-toggle">
+            <label for="theme-toggle" class="theme-switch__label">
+              <span class="vh-sr">Hellen Modus aktivieren</span>
+              <span class="theme-switch__option theme-switch__option--light" aria-hidden="true"><svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></span>
+              <span class="theme-switch__option theme-switch__option--dark" aria-hidden="true"><svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"></path></svg></span>
+            </label>
+          </div>
+          <a class="vh-btn new-event-btn" href="/invitations/new">
+            <svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+            <span class="sr-mobile">Mitglied einladen</span>
+          </a>
+        </div>
+      </header>
+      <div class="toolbar">
+        <form class="search" action="/members/" method="get" role="search">
+          <svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
+          <label for="member-q" class="vh-sr">Mitglieder durchsuchen</label>
+          <input id="member-q" name="q" type="search" placeholder="Name, E-Mail oder Ort" />
+          <button type="submit" class="vh-sr">Suchen</button>
+        </form>
+        <div class="vh-chip-group" role="group" aria-label="Nach Gruppe filtern">
+          <a class="vh-chip" href="/members/" aria-current="true">Alle <span class="vh-chip__count">6</span></a>
+          <a class="vh-chip" href="/members/?group=vorstand">Vorstand <span class="vh-chip__count">2</span></a>
+          <a class="vh-chip" href="/members/?group=kassenwart">Kassenwart <span class="vh-chip__count">1</span></a>
+          <a class="vh-chip" href="/members/?group=admin">Admin <span class="vh-chip__count">1</span></a>
+        </div>
+      </div>
+      <div class="split">
+        <section class="vh-tile member-list split__main" aria-labelledby="member-list-title">
+          <h2 class="vh-sr" id="member-list-title">Mitgliederliste</h2>
+          <div class="list-head" aria-hidden="true">
+            <span>Name</span><span>Gruppe</span><span>Ort</span><span></span>
+          </div>
+          <ul class="vh-list">
+            <li>
+              <a class="vh-list-row member-row" href="/members/1">
+                <span class="member-row__main">
+                  <span class="vh-avatar vh-avatar--green" aria-hidden="true">AS</span>
+                  <span class="vh-list-row__body">
+                    <span class="vh-list-row__title">Anna Schmidt</span>
+                    <span class="vh-list-row__meta">anna.schmidt@example.org</span>
+                    <span class="vh-list-row__meta member-row__meta-mobile">Vorstand · Konstanz</span>
+                  </span>
+                </span>
+                <span class="member-row__group"><span class="vh-badge vh-badge--sm">Vorstand</span></span>
+                <span class="member-row__city">Konstanz</span>
+                <svg class="vh-icon vh-list-row__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"></path></svg>
+              </a>
+            </li>
+            <li>
+              <a class="vh-list-row member-row" href="/members/2">
+                <span class="member-row__main">
+                  <span class="vh-avatar" aria-hidden="true">JW</span>
+                  <span class="vh-list-row__body">
+                    <span class="vh-list-row__title">Jonas Weber</span>
+                    <span class="vh-list-row__meta">jonas.weber@example.org</span>
+                    <span class="vh-list-row__meta member-row__meta-mobile">Kassenwart · Allensbach</span>
+                  </span>
+                </span>
+                <span class="member-row__group"><span class="vh-badge vh-badge--sm">Kassenwart</span></span>
+                <span class="member-row__city">Allensbach</span>
+                <svg class="vh-icon vh-list-row__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"></path></svg>
+              </a>
+            </li>
+            <li>
+              <a class="vh-list-row member-row" href="/members/4">
+                <span class="member-row__main">
+                  <span class="vh-avatar vh-avatar--violet" aria-hidden="true">PK</span>
+                  <span class="vh-list-row__body">
+                    <span class="vh-list-row__title">Paul Krüssel <span class="member-row__you">(du)</span></span>
+                    <span class="vh-list-row__meta">paul@example.org</span>
+                    <span class="vh-list-row__meta member-row__meta-mobile">Admin · Konstanz</span>
+                  </span>
+                </span>
+                <span class="member-row__group"><span class="vh-badge vh-badge--sm vh-badge--inverse">Admin</span></span>
+                <span class="member-row__city">Konstanz</span>
+                <svg class="vh-icon vh-list-row__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"></path></svg>
+              </a>
+            </li>
+            <li>
+              <a class="vh-list-row member-row" href="/members/3" aria-current="true">
+                <span class="member-row__main">
+                  <span class="vh-avatar vh-avatar--amber" aria-hidden="true">LH</span>
+                  <span class="vh-list-row__body">
+                    <span class="vh-list-row__title">Lena Hoffmann</span>
+                    <span class="vh-list-row__meta">lena.hoffmann@example.org</span>
+                    <span class="vh-list-row__meta member-row__meta-mobile">Vorstand · Radolfzell</span>
+                  </span>
+                </span>
+                <span class="member-row__group"><span class="vh-badge vh-badge--sm">Vorstand</span></span>
+                <span class="member-row__city">Radolfzell</span>
+                <svg class="vh-icon vh-list-row__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"></path></svg>
+              </a>
+            </li>
+            <li>
+              <a class="vh-list-row member-row" href="/members/5">
+                <span class="member-row__main">
+                  <span class="vh-avatar vh-avatar--green" aria-hidden="true">MY</span>
+                  <span class="vh-list-row__body">
+                    <span class="vh-list-row__title">Mehmet Yılmaz</span>
+                    <span class="vh-list-row__meta">mehmet.yilmaz@example.org</span>
+                    <span class="vh-list-row__meta member-row__meta-mobile">Konstanz</span>
+                  </span>
+                </span>
+                <span class="member-row__group"><span class="member-row__empty">–</span></span>
+                <span class="member-row__city">Konstanz</span>
+                <svg class="vh-icon vh-list-row__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"></path></svg>
+              </a>
+            </li>
+            <li>
+              <a class="vh-list-row member-row" href="/members/6">
+                <span class="member-row__main">
+                  <span class="vh-avatar" aria-hidden="true">SB</span>
+                  <span class="vh-list-row__body">
+                    <span class="vh-list-row__title">Sophie Braun</span>
+                    <span class="vh-list-row__meta">sophie.braun@example.org</span>
+                    <span class="vh-list-row__meta member-row__meta-mobile">Singen</span>
+                  </span>
+                </span>
+                <span class="member-row__group"><span class="member-row__empty">–</span></span>
+                <span class="member-row__city">Singen</span>
+                <svg class="vh-icon vh-list-row__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"></path></svg>
+              </a>
+            </li>
+          </ul>
+        </section>
+        <article class="vh-detail split__side" aria-labelledby="member-name">
+          <div class="vh-detail__top">
+            <div class="member-profile__head">
+              <span class="vh-avatar vh-avatar--amber member-profile__avatar" aria-hidden="true">LH</span>
+              <div class="vh-detail__heading">
+                <h2 class="vh-detail__title" id="member-name">Lena Hoffmann</h2>
+                <p class="vh-detail__subtitle">2. Vorsitzende · Mitglied seit <time datetime="2017">2017</time></p>
+              </div>
+            </div>
+            <a class="vh-btn vh-btn--ghost vh-btn--icon vh-detail__close" href="/members/" aria-label="Profil schließen"><svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg></a>
+          </div>
+          <address>
+            <dl class="vh-dl">
+              <div><dt>E-Mail</dt><dd><a href="mailto:lena.hoffmann@example.org">lena.hoffmann@example.org</a></dd></div>
+              <div><dt>Telefon</dt><dd><a href="tel:+4915100000004">+49&nbsp;151&nbsp;000&nbsp;000&nbsp;04</a></dd></div>
+              <div><dt>Adresse</dt><dd>Musterweg 4<br />78315 Radolfzell</dd></div>
+            </dl>
+          </address>
+          <section class="vh-detail__section" aria-labelledby="member-events">
+            <h3 class="vh-detail__label" id="member-events">Zugesagt</h3>
+            <a class="mini-row" href="/events/1"><time datetime="2026-10-24">24.10.</time> Herbstwanderung zum Bodanrück</a>
+            <a class="mini-row" href="/events/3"><time datetime="2026-11-14">14.11.</time> Laternenlauf mit den Jugendgruppen</a>
+          </section>
+          <a class="vh-btn vh-btn--block" href="mailto:lena.hoffmann@example.org">E-Mail schreiben</a>
+        </article>
+      </div>
+      </main>
+      <footer class="site-footer">
+        <p>&copy; 2026 Vereinshub · TSV Musterstadt e.V.</p>
+        <ul>
+          <li><a href="/imprint">Impressum</a></li>
+          <li><a href="/privacy">Datenschutz</a></li>
+        </ul>
+      </footer>
+    </body>
+    </html>
