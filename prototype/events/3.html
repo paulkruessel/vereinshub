@@ -12,10 +12,12 @@
   </head>
   <body>
     <header class="site-header">
+      <!-- Logo -->
       <a class="logo" href="/">
         <span class="logo__mark" aria-hidden="true">v</span>
         <span class="logo__text">vereinshub</span>
       </a>
+      <!-- Navigation -->
       <nav class="main-nav" aria-label="Hauptnavigation">
         <ul class="vh-nav">
           <li><a class="vh-nav-item" href="/"><svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg>Übersicht</a></li>
@@ -25,6 +27,7 @@
           <li><a class="vh-nav-item" href="/admin/"><svg class="vh-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4v5c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V7z"/></svg>Verwaltung</a></li>
         </ul>
       </nav>
+      <!-- Profile -->
       <a class="profile-card" href="/profile">
         <span class="vh-avatar vh-avatar--violet" aria-hidden="true">PK</span>
         <span class="profile-card__text sr-mobile">
@@ -34,6 +37,7 @@
       </a>
     </header>
     <main class="main--wide">
+      <!-- Content Header -->
       <header class="page-header">
         <div class="page-header__title">
           <p class="page-header__date">1 Termin im November</p>
@@ -54,7 +58,9 @@
           </a>
         </div>
       </header>
+      <!-- Content split -->
         <div class="split">
+          <!-- Split Main Content: Calendar -->
           <section class="vh-tile month-calendar split__main" aria-labelledby="calendar-title">
             <div class="month-calendar__head">
               <div class="month-calendar__nav">
@@ -133,6 +139,7 @@
               <li class="month-calendar__day is-outside"><span class="month-calendar__num">6</span></li>
             </ol>
         </section>
+        <!-- Split Side Content: Selected Event -->
         <article class="vh-detail split__side event-detail" aria-labelledby="event-title">
           <div class="vh-detail__top">
             <span class="vh-badge vh-badge--sm vh-badge--warning"><span class="vh-badge__dot"></span>Offen</span>
@@ -194,6 +201,7 @@
         </article>
       </div>
       </main>
+      <!-- Footer -->
       <footer class="site-footer">
         <p>&copy; 2026 Vereinshub · TSV Musterstadt e.V.</p>
         <ul>
