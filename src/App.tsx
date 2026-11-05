@@ -1,10 +1,16 @@
 import './App.css'
-import Navbar from './navbar/Navbar'
+import Dash from './dash/dash.tsx'
+import Footer from './footer/footer.tsx'
+import Navbar from './navbar/Navbar.tsx'
 
 function App() {
 
   return (
-    <Navbar />
+    <>
+      <Navbar />
+      <Dash />
+      <Footer />
+    </>
   )
 }
 

@@ -1,111 +1,1590 @@
-:root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+/* ==========================================================================
+   Vereinshub – Seitenlayout und seitenspezifische Styles
+   Mobile-first: Die Basis gilt für das Handy (Tab-Leiste unten,
+   schwebender Button). Ab 48em (768px) wird die Navigation zur
+   Seitenleiste links, ab 64em (1024px) wächst die Typografie.
+   ========================================================================== */
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
-
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
-}
-
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
+/* ---------- Grundlagen ---------- */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
+  min-height: 100vh;
+  padding-bottom: calc(var(--tabbar-height) + var(--space-4));
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: 1.5;
+}
+
+#root {
+  display: contents;
 }
 
 h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
+h2,
+h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
 }
 
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
 p {
   margin: 0;
 }
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
+a {
+  color: var(--color-link);
 }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+a:hover,
+a:focus-visible {
+  color: var(--color-link-hover);
+}
+
+/* Auf dem Handy nur für Screenreader, ab Tablet sichtbar */
+.sr-mobile {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- Kopfbereich: Logo, Navigation, Profil ---------- */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.logo:hover {
+  color: var(--color-text);
+}
+
+.logo__mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 11px;
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 800;
+}
+
+.logo__text {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Handy: Navigation als Tab-Leiste am unteren Rand */
+.main-nav {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  height: var(--tabbar-height);
+  padding: var(--space-2) var(--space-2) var(--space-5);
+  border-top: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.main-nav .vh-nav {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  height: 100%;
+  gap: 0;
+}
+
+.main-nav .vh-nav-item {
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-1);
+  height: 100%;
+  padding: 0;
+  font-size: 0.6875rem;
+}
+
+.main-nav .vh-nav-item,
+.main-nav .vh-nav-item:hover,
+.main-nav .vh-nav-item[aria-current="page"] {
+  background: transparent;
+}
+
+.main-nav .vh-nav-item[aria-current="page"] {
+  color: var(--color-accent-text);
+  font-weight: 700;
+}
+
+.main-nav .vh-icon {
+  width: 20px;
+  height: 20px;
+  padding: 5px 16px;
+  box-sizing: content-box;
+  border-radius: var(--radius-pill);
+}
+
+.main-nav .vh-nav-item[aria-current="page"] .vh-icon {
+  background: var(--color-primary-soft);
+}
+
+/* Profil: auf dem Handy nur der Avatar oben rechts */
+.profile-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.profile-card:hover {
+  color: var(--color-text);
+}
+
+.profile-card__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+
+.profile-card__name {
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.profile-card__club {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+/* ---------- Inhaltsbereich ---------- */
+main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  width: 100%;
+  max-width: calc(var(--max-width) + 2 * var(--space-10));
+  margin: 0 auto;
+  padding: 0 var(--space-5) var(--space-6);
+}
+
+/* Seitenkopf: Datum, Begrüßung, Aktionen */
+.page-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.page-header__title {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.page-header__date {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+.page-header h1 {
+  font-size: 2.125rem;
+  line-height: 1.05;
+  letter-spacing: var(--tracking-display);
+}
+
+.page-header__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Suchfeld als Pille mit Lupe */
+.search {
+  display: flex;
+  flex: 1 1 10rem;
+  align-items: center;
+  gap: var(--space-2);
+  height: var(--control-height);
+  padding: 0 var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+}
+
+.search:focus-within {
+  box-shadow: var(--focus-ring);
+}
+
+.search .vh-icon {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2;
+}
+
+.search input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: var(--color-text);
+  font: inherit;
+  font-size: 0.875rem;
+}
+
+/* Handy: "Neuer Termin" schwebt unten rechts über der Tab-Leiste */
+.new-event-btn {
+  position: fixed;
+  right: var(--space-5);
+  bottom: calc(var(--tabbar-height) + var(--space-4));
+  z-index: 10;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border-radius: 18px;
+  box-shadow: var(--shadow-fab);
+}
+
+.new-event-btn .vh-icon {
+  width: 22px;
+  height: 22px;
+}
+
+/* ---------- Dashboard ---------- */
+
+/* Kacheln umbrechen automatisch, flex-basis steuert die Breite */
+.dashboard-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5);
+}
+
+.dashboard-grid > .next-event { flex: 2 1 32rem; }
+.dashboard-grid > .calendar { flex: 1 1 18rem; }
+.dashboard-grid > .upcoming { flex: 1 1 22rem; }
+.dashboard-grid > .posts { flex: 1.4 1 26rem; }
+
+/* Nächster Termin mit Countdown */
+.next-event {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-7);
+}
+
+.next-event__countdown {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.next-event__countdown-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.next-event__body {
+  display: flex;
+  flex: 1 1 16rem;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.next-event__title {
+  font-size: 1.375rem;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.next-event__title a {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.next-event__title a:hover {
+  color: var(--color-link-hover);
+}
+
+.next-event__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  padding-top: var(--space-1);
+}
+
+/* Monatskalender: 7 Spalten, der 1. Oktober 2026 ist ein Donnerstag */
+.calendar__weekdays,
+.calendar__days {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: var(--space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: center;
+}
+
+.calendar__weekdays {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--color-text-faint);
+}
+
+.calendar__days {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+}
+
+.calendar__days li {
+  color: var(--color-text-faint);
+}
+
+.calendar__days li:first-child {
+  grid-column-start: 4;
+}
+
+/* Vergangene Tage blass, ab heute normale Textfarbe */
+.calendar__days .is-today ~ li {
+  color: var(--color-text);
+}
+
+.calendar__days li > * {
+  display: block;
+  padding: 6px 0;
+  border-radius: var(--radius-pill);
+}
+
+.calendar__days .is-today > * {
+  background: var(--color-inverse-bg);
+  color: var(--color-inverse-text);
+  font-weight: 500;
+}
+
+.calendar__days .has-event > a {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.calendar__days .has-event > a:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.upcoming {
+  gap: var(--space-2);
+}
+
+.attend-form {
+  margin: 0;
+}
+
+/* Beiträge zu vergangenen Terminen */
+.post {
+  display: flex;
+  gap: 14px;
+}
+
+.post + .post {
+  padding-top: 14px;
+  border-top: 1px solid var(--color-border);
+}
+
+.post__body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.post__meta {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.post__author {
+  font-weight: 700;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.post__event {
+  text-decoration: none;
+}
+
+.post__meta time {
+  font-family: var(--font-mono);
+}
+
+.post__text {
+  line-height: var(--leading-normal);
+  color: var(--color-text-body);
+}
+
+.post__comments {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-decoration: none;
+}
+
+/* ---------- Fußbereich ---------- */
+.site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-5);
+  max-width: calc(var(--max-width) + 2 * var(--space-10));
+  margin: 0 auto;
+  padding: var(--space-5);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  grid-column: 2;
+}
+
+.site-footer ul {
+  display: flex;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ---------- Tablet und Desktop (ab 48em ≈ 768px) ---------- */
+@media (min-width: 48em) {
+  /* Zweispaltiges Raster: Seitenleiste links, Inhalt und Footer rechts */
+  body {
+    display: grid;
+    grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
+    grid-template-rows: 1fr auto;
+    padding-bottom: 0;
+  }
+
+  .site-header {
+    position: sticky;
+    top: 0;
+    grid-row: 1 / span 2;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: var(--space-7);
+    height: 100vh;
+    padding: var(--space-6) var(--space-4);
+    border-right: 1px solid var(--color-border);
+  }
+
+  .logo {
+    padding: 0 var(--space-2);
+  }
+
+  /* Navigation wird zur senkrechten Liste in der Seitenleiste */
+  .main-nav {
+    position: static;
+    height: auto;
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+
+  .main-nav .vh-nav {
+    display: flex;
+    gap: var(--space-1);
+  }
+
+  .main-nav .vh-nav-item {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: var(--space-3);
+    height: var(--control-height);
+    padding: 0 14px;
+    font-size: 0.875rem;
+  }
+
+  .main-nav .vh-nav-item:hover {
+    background: var(--color-surface-sunken);
+  }
+
+  .main-nav .vh-nav-item[aria-current="page"] {
+    background: var(--color-surface-raised);
+    color: var(--color-text);
+    font-weight: 600;
+  }
+
+  .main-nav .vh-icon,
+  .main-nav .vh-nav-item[aria-current="page"] .vh-icon {
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    background: transparent;
+  }
+
+  /* Profil als Karte am unteren Ende der Seitenleiste */
+  .profile-card {
+    margin-top: auto;
+    padding: var(--space-3);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-row);
+    background: var(--color-surface);
+  }
+
+  .sr-mobile {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+
+  .nav-label--short {
+    display: none;
+  }
+
+  main {
+    gap: var(--space-7);
+    padding: var(--space-10) var(--space-10) var(--space-6);
+  }
+
+  .site-footer {
+    width: 100%;
+    padding: var(--space-5) var(--space-10);
+  }
+
+  .page-header {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-5);
+  }
+
+  .search {
+    flex: 0 1 12rem;
+  }
+
+  /* "Neuer Termin" wird zum normalen Button im Seitenkopf */
+  .new-event-btn {
+    position: static;
+    width: auto;
+    height: var(--control-height);
+    padding: 0 18px;
+    border-radius: var(--radius-pill);
+    box-shadow: none;
+  }
+
+  .new-event-btn .vh-icon {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* ---------- Großer Desktop (ab 64em ≈ 1024px) ---------- */
+@media (min-width: 64em) {
+  .page-header h1 {
+    font-size: var(--text-display);
+    line-height: 1;
+  }
+
+  .vh-countdown {
+    font-size: 7.5rem;
+  }
+
+  .next-event__title {
+    font-size: var(--text-xl);
+  }
+}
+
+/* ----------- Login ------------ */
+.auth-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-5);
+}
+
+.auth {
+  width: 100%;
+  max-width: 26rem;
+  padding: var(--space-7);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-tile);
+}
+
+.auth__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.auth__header h1 {
+  font-size: 2rem;
+  letter-spacing: var(--tracking-display);
+}
+
+.auth__intro {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.auth__note {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.auth-page .site-footer {
+  justify-content: center;
+  max-width: 26rem;
+  padding-inline: 0;
+}
+
+/* ==========================================================================
+   Seiten mit Liste/Kalender und Detail-Panel:
+   Mitglieder, Veranstaltungen, Dateiablage
+   Mobile-first: Auf dem Handy steht das Detail-Panel unter dem Inhalt,
+   ab 48em daneben.
+   ========================================================================== */
+
+/* ---------- Gemeinsam ---------- */
+
+/* Breitere Seite für Kalender und Dateiablage: <main class="main--wide"> */
+main.main--wide {
+  max-width: calc(var(--content-wide-max-width) + 2 * var(--space-10));
+}
+
+/* Inhalt + Detail-Panel nebeneinander, bricht auf schmalen Bildschirmen um
+   <div class="split"><section class="split__main">…</section><aside class="vh-detail split__side">…</aside></div> */
+.split {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--space-5);
+}
+
+.split__main {
+  flex: 1 1 30rem;
+  min-width: 0;
+}
+
+.split__side {
+  flex: 1 1 var(--detail-panel-width);
+  min-width: 0;
+}
+
+/* Werkzeugleiste unter dem Seitenkopf: Suche + Filter-Chips */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.toolbar .search {
+  flex: 1 1 100%;
+}
+
+/* Spaltenköpfe über Listen, erst ab Tablet sichtbar */
+.list-head {
+  display: none;
+}
+
+.list-head span {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+/* ---------- Mitglieder ---------- */
+
+.member-list {
+  gap: var(--space-1);
+  padding: var(--space-3);
+}
+
+/* Linker Teil einer Zeile: Avatar bzw. Dateisymbol + Name */
+.member-row__main,
+.file-row__main {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+/* Gruppe und Ort stehen auf dem Handy in der Meta-Zeile, ab Tablet in eigenen Spalten */
+.member-row__group,
+.member-row__city {
+  display: none;
+}
+
+.member-row__you {
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
+.member-row .vh-avatar {
+  width: 40px;
+  height: 40px;
+  font-size: var(--text-sm);
+}
+
+.member-row__empty {
+  font-size: var(--text-sm);
+  color: var(--color-text-faint);
+}
+
+.member-profile__head {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.member-profile__avatar.vh-avatar {
+  width: 72px;
+  height: 72px;
+  font-family: var(--font-display);
+  font-size: 1.625rem;
+}
+
+/* Kleine Zeile mit Datum und Titel, z. B. zugesagte Termine im Profil */
+.mini-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 10px var(--space-3);
+  border-radius: 14px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.mini-row time {
+  width: 2.75rem;
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+
+/* ---------- Veranstaltungen: großer Monatskalender ----------
+   <section class="vh-tile month-calendar">
+     <div class="month-calendar__head">…Titel, Pfeile, .vh-legend…</div>
+     <ol class="month-calendar__weekdays" aria-hidden="true"><li>Mo</li>…</ol>
+     <ol class="month-calendar__grid">
+       <li class="month-calendar__day is-outside"><span class="month-calendar__num">28</span></li>
+       <li class="month-calendar__day is-today"><span class="month-calendar__num">21</span>
+         <ul class="month-calendar__events">
+           <li><a class="month-calendar__event month-calendar__event--yes" href="…" aria-current="true">
+             <span class="month-calendar__dot"></span>
+             <span class="month-calendar__label"><time>10:00</time> Herbstwanderung</span>
+           </a></li>
+         </ul>
+       </li>
+     </ol>
+   </section>
+   Status: --yes (zugesagt), --open, --no (abgesagt), --past. Ausgewählt: aria-current="true". */
+.month-calendar {
+  gap: var(--space-4);
+  padding: var(--space-4);
+}
+
+.month-calendar__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.month-calendar__nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.month-calendar__title {
+  margin: 0 6px;
+  font-size: 1.125rem;
+  letter-spacing: -0.02em;
+}
+
+.month-calendar__weekdays,
+.month-calendar__grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: var(--space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.month-calendar__weekdays {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+}
+
+/* Handy: kleine Tagesfelder, Termine nur als Punkte */
+.month-calendar__day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  min-width: 0;
+  min-height: var(--control-height);
+  padding: 4px 2px;
+  border: 1px solid transparent;
+  border-radius: 14px;
+}
+
+.month-calendar__num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 26px;
+  height: 26px;
+  padding: 0 6px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.month-calendar__day.is-outside .month-calendar__num {
+  color: var(--color-text-faint);
+}
+
+.month-calendar__day.is-today .month-calendar__num {
+  background: var(--color-inverse-bg);
+  color: var(--color-inverse-text);
+}
+
+.month-calendar__events {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.month-calendar__event {
+  --dot: var(--color-text-faint);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 10px;
+  border-radius: 8px;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--color-text);
+}
+
+.month-calendar__event:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.month-calendar__dot {
+  width: 6px;
+  height: 6px;
+  flex-shrink: 0;
+  border-radius: var(--radius-pill);
+  background: var(--dot);
+}
+
+/* Auf dem Handy nur für Screenreader */
+.month-calendar__label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.month-calendar__label time {
+  font-family: var(--font-mono);
+  font-weight: 500;
+}
+
+.month-calendar__event--yes { --dot: var(--color-success-dot); --event-bg: var(--color-success-bg); --event-fg: var(--color-success-text); }
+.month-calendar__event--open { --dot: var(--color-warning-dot); --event-bg: var(--color-warning-bg); --event-fg: var(--color-warning-text); }
+.month-calendar__event--no { --dot: var(--color-danger-dot); --event-bg: var(--color-danger-bg); --event-fg: var(--color-danger-text); }
+.month-calendar__event--past { --dot: var(--color-text-faint); --event-bg: var(--color-chip-bg); --event-fg: var(--color-text-muted); }
+
+/* Termin-Detail */
+.event-detail__rsvp {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2);
+  margin: 0;
+}
+
+.event-detail__attendees {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.event-detail__attendees .vh-avatar {
+  width: 28px;
+  height: 28px;
+  font-size: 0.625rem;
+}
+
+.event-detail__desc {
+  line-height: var(--leading-normal);
+  color: var(--color-text-body);
+}
+
+/* ---------- Dateiablage ---------- */
+
+/* Ordnerliste links: auf dem Handy ausgeblendet, dort zeigen die Ordner-Kacheln den Weg */
+.folder-nav {
+  display: none;
+}
+
+.folder-nav__label {
+  padding: 14px var(--space-3) 6px;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.folder-nav .vh-nav-item {
+  padding: 0 var(--space-3);
+}
+
+.folder-nav__count {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.files-content {
+  gap: 14px;
+  padding: var(--space-4);
+}
+
+.files-content__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.files-content__head .search {
+  flex: 1 1 100%;
+  background: var(--color-surface-sunken);
+}
+
+.files-content__subtitle {
+  margin: var(--space-2) 0 0;
+  font-size: 1.0625rem;
+}
+
+/* Pfad: ‹ Alle Ordner / Versammlungen */
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.breadcrumb__back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  height: var(--control-height);
+  padding: 0 10px 0 4px;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.breadcrumb__sep {
+  color: var(--color-text-faint);
+}
+
+.breadcrumb__current {
+  margin: 0 0 0 6px;
+  font-size: 1.375rem;
+  letter-spacing: -0.01em;
+}
+
+.folder-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Datei-Zeile: auf dem Handy Name + Meta, ab Tablet mit Spalten */
+.file-row__by,
+.file-row__date,
+.file-row__size {
+  display: none;
+}
+
+.file-row__date,
+.file-row__size {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+}
+
+.file-row__size {
+  text-align: right;
+}
+
+.file-row__by.vh-avatar {
+  width: 28px;
+  height: 28px;
+  font-size: 0.625rem;
+}
+
+/* Schematische Vorschau im Detail-Panel */
+.file-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 10rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-row);
+  background: var(--color-surface);
+}
+
+.file-preview__page {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 92px;
+  height: 120px;
+  padding: 14px 12px;
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+}
+
+/* Textzeilen der Vorschau als Verlauf in der Textfarbe des Dateityps */
+.file-preview__page::before {
+  content: "";
+  height: 40px;
+  background: repeating-linear-gradient(to bottom, currentColor 0 4px, transparent 4px 11px);
+  opacity: 0.35;
+}
+
+.file-preview__page span {
+  align-self: flex-end;
+}
+
+/* ---------- Tablet und Desktop (ab 48em) ---------- */
+@media (min-width: 48em) {
+  .toolbar .search {
+    flex: 1 1 20rem;
+  }
+
+  .list-head {
+    display: grid;
+    gap: var(--space-4);
+    padding: var(--space-2) var(--space-3) 0;
+  }
+
+  /* Mitglieder: Name | Gruppe | Ort | Pfeil */
+  .member-list .list-head,
+  .member-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 8.75rem 6.875rem 20px;
+    gap: var(--space-4);
+  }
+
+  .member-row__main {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    min-width: 0;
+  }
+
+  .member-row__group,
+  .member-row__city {
+    display: block;
+  }
+
+  .member-row__city {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+  }
+
+  .member-row__meta-mobile {
+    display: none;
+  }
+
+  /* Kalender: große Tagesfelder mit beschrifteten Terminen */
+  .month-calendar {
+    padding: var(--space-6);
+  }
+
+  .month-calendar__title {
+    font-size: 1.625rem;
+  }
+
+  .month-calendar__weekdays,
+  .month-calendar__grid {
+    gap: 6px;
+  }
+
+  .month-calendar__weekdays {
+    padding: 0 var(--space-2);
+    font-size: var(--text-xs);
+    text-align: left;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+  }
+
+  .month-calendar__day {
+    align-items: stretch;
+    gap: var(--space-1);
+    min-height: var(--calendar-cell-height);
+    padding: var(--space-2);
+    border-color: var(--color-border);
+    background: var(--color-surface-sunken);
+  }
+
+  .month-calendar__day.is-outside {
+    border-color: transparent;
+    background: transparent;
+  }
+
+  .month-calendar__day.is-today {
+    border-color: var(--color-border-strong);
+  }
+
+  .month-calendar__num {
+    align-self: flex-start;
+  }
+
+  .month-calendar__event {
+    justify-content: flex-start;
+    min-height: 28px;
+    padding: 4px var(--space-2);
+    background: var(--event-bg, var(--color-chip-bg));
+    color: var(--event-fg, var(--color-text));
+  }
+
+  .month-calendar__event:hover {
+    color: var(--event-fg, var(--color-text));
+    filter: brightness(1.1);
+  }
+
+  .month-calendar__event[aria-current="true"] {
+    --dot: var(--color-on-primary);
+    background: var(--color-primary);
+    color: var(--color-on-primary);
+  }
+
+  /* Bis zu zwei Zeilen: erst die Uhrzeit, dann so viel vom Titel wie passt */
+  .month-calendar__label {
+    position: static;
+    display: -webkit-box;
+    width: auto;
+    height: auto;
+    min-width: 0;
+    overflow: hidden;
+    clip: auto;
+    line-height: 1.3;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .month-calendar__event {
+    align-items: flex-start;
+  }
+
+  .month-calendar__event .month-calendar__dot {
+    margin-top: 5px;
+  }
+
+  .split__side.event-detail {
+    flex: 0 1 23.75rem;
+    min-width: 18.75rem;
+  }
+
+  /* Dateiablage: Ordnerliste | Inhalt | Detail */
+  .folder-nav {
+    display: flex;
+    flex-direction: column;
+    flex: 0 1 var(--folder-nav-width);
+    gap: var(--space-1);
+    min-width: 12.5rem;
+    padding: var(--space-3);
+  }
+
+  .files-content {
+    flex: 1 1 28rem;
+    padding: var(--space-5);
+  }
+
+  .files-content__head .search {
+    flex: 0 1 15rem;
+  }
+
+  .folder-grid {
+    grid-template-columns: repeat(auto-fill, minmax(9.375rem, 1fr));
+  }
+
+  /* Datei: Name | Von | Datum | Größe */
+  .file-list .list-head,
+  .file-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 32px 5.25rem 4rem;
+    gap: 14px;
+  }
+
+  .file-row__main {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    min-width: 0;
+  }
+
+  .file-row__by,
+  .file-row__date,
+  .file-row__size {
+    display: block;
+  }
+
+  .file-row__by.vh-avatar {
+    display: inline-flex;
+  }
+
+  .split__side.file-detail {
+    flex: 0 1 var(--detail-panel-width);
+    min-width: 17.5rem;
+  }
+}
+
+/* ==========================================================================
+   Fehlerseite 404
+   Aufbau (Klassen von außen nach innen):
+     main.error-page
+       .error
+         .error__digits  > 3× .error__digit (mittleres zusätzlich .error__digit--highlight)
+                            je .error__weekday + .error__number   (Reihe ist aria-hidden)
+         .error__intro   > .error__code, .error__title (h1), .error__lead
+         .error__actions > .vh-btn (primär „Zur Übersicht“) + .vh-btn.vh-btn--secondary („Zurück“)
+         .error__quick   > .error__quick-label + .error__links > .error__link
+                            je .error__link-icon + .error__link-text (.error__link-title, .error__link-meta)
+   Seitenleiste bzw. Tab-Leiste bleiben wie auf allen anderen Seiten.
+   ========================================================================== */
+
+.error {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-7);
+  width: 100%;
+  max-width: var(--error-content-max-width);
+  margin: 0 auto;
+}
+
+/* „4 0 4“ als drei Kalenderfelder */
+.error__digits {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--error-digit-gap);
+  max-width: var(--error-digits-max-width);
+}
+
+.error__digit {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: var(--error-digit-height-mobile);
+  padding: 10px var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  background: var(--color-surface-sunken);
+  color: var(--color-text);
+}
+
+/* Die „0“ ist hervorgehoben wie ein Tag mit Termin */
+.error__digit--highlight {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+.error__weekday {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+}
+
+.error__digit--highlight .error__weekday {
+  color: var(--color-on-primary);
+}
+
+/* Terminpunkt vor dem Wochentag des hervorgehobenen Feldes */
+.error__digit--highlight .error__weekday::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: var(--radius-pill);
+  background: currentColor;
+}
+
+.error__number {
+  font-family: var(--font-display);
+  font-size: var(--error-digit-size);
+  font-weight: 800;
+  line-height: 0.8;
+  letter-spacing: -0.05em;
+}
+
+/* Text */
+.error__intro {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.error__code {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+.error__title {
+  font-size: 2rem;
+  line-height: 1.08;
+  letter-spacing: var(--tracking-display);
+  text-wrap: balance;
+}
+
+.error__lead {
+  max-width: 32.5rem;
+  line-height: var(--leading-normal);
+  color: var(--color-text-secondary);
+}
+
+/* Handy: zwei breite Buttons untereinander */
+.error__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.error__actions .vh-btn {
+  width: 100%;
+  height: 3rem;
+  font-size: var(--text-base);
+}
+
+/* Schnellzugriff: auf dem Handy übernimmt das die Tab-Leiste */
+.error__quick {
+  display: none;
+}
+
+.error__quick-label {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  font-family: var(--font-sans);
+}
+
+.error__links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10.625rem, 1fr));
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.error__link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-row);
+  background: var(--color-surface);
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.error__link:hover {
+  border-color: var(--color-border-strong);
+  color: var(--color-text);
+}
+
+.error__link:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.error__link-icon {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: var(--file-icon-size);
+  height: var(--file-icon-size);
+  border-radius: var(--radius-control);
+  background: var(--color-primary-soft);
+  color: var(--color-primary-soft-text);
+}
+
+.error__link-icon .vh-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.error__link-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.3;
+}
+
+.error__link-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.error__link-meta {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+/* ---------- Tablet und Desktop (ab 48em) ---------- */
+@media (min-width: 48em) {
+  /* Inhalt senkrecht mittig neben der Seitenleiste */
+  main.error-page {
+    justify-content: center;
+    min-height: 100vh;
+  }
+
+  .error {
+    --error-digit-gap: var(--space-3);
+    gap: calc(var(--space-7) + var(--space-1)); /* 32 px */
+  }
+
+  .error__digit {
+    height: auto;
+    aspect-ratio: var(--error-digit-ratio);
+    padding: 14px var(--space-4);
+    border-radius: var(--radius-tile);
+  }
+
+  .error__weekday {
+    gap: 6px;
+    font-size: var(--text-xs);
+  }
+
+  .error__digit--highlight .error__weekday::before {
+    width: 6px;
+    height: 6px;
+  }
+
+  .error__number {
+    font-size: var(--error-digit-size-lg);
+  }
+
+  .error__code {
+    font-size: var(--text-sm);
+  }
+
+  .error__title {
+    font-size: var(--text-display);
+    line-height: 1.05;
+  }
+
+  .error__lead {
+    font-size: 1rem;
+  }
+
+  .error__actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .error__actions .vh-btn {
+    width: auto;
+    height: var(--control-height);
+    font-size: 0.875rem;
+  }
+
+  .error__quick {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--color-border);
+  }
 }
