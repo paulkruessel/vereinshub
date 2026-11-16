@@ -9,8 +9,13 @@ interface EventsProps {
 }
 
 function Events({ events }: EventsProps) {
-    const [month, setMonth] = useState(() => startOfMonth(new Date()));
     const { id } = useParams();
+    // Lazy Initializer: wird nur beim ersten Render ausgewertet.
+    // Wird direkt /events/:id aufgerufen, startet der Kalender im Monat dieses Events.
+    const [month, setMonth] = useState(() => {
+        const selected = events.find(e => e.id === Number(id));
+        return startOfMonth(selected ? selected.startDate : new Date());
+    });
 
     const eventsInMonth = events.filter(e =>
         e.startDate.getFullYear() === month.getFullYear() && e.startDate.getMonth() === month.getMonth()

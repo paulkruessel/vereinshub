@@ -9,6 +9,7 @@ import MemberDetail from './members/member-card/MemberDetail.tsx'
 import Events from './events/Events.tsx'
 import { clubEvents } from './data/clubEvents.ts'
 import type { ClubEvent } from './types.ts'
+import EventDetail from './events/event-card/EventDetail.tsx'
 
 function App() {
   const [events] = useState<ClubEvent[]>(clubEvents)
@@ -22,9 +23,10 @@ function App() {
         <Route path='/members' element={<Members/>}>
           <Route path=':id' element={<MemberDetail events={events} />} />
         </Route>
-        <Route path='/events' element={<Events events={events} />} />
+        <Route path='/events' element={<Events events={events} />}>
+          <Route path=':id' element={<EventDetail events={events} />} />
+        </Route>
       </Routes>
-
       <Footer />
     </BrowserRouter>
   )
