@@ -6,6 +6,7 @@ import Footer from './footer/footer.tsx'
 import Navbar from './navbar/Navbar.tsx'
 import Members from './members/Members.tsx'
 import MemberDetail from './members/member-card/MemberDetail.tsx'
+import Events from './events/Events.tsx'
 import { clubEvents } from './data/clubEvents.ts'
 import type { ClubEvent } from './types.ts'
 
@@ -21,6 +22,7 @@ function App() {
         <Route path='/members' element={<Members/>}>
           <Route path=':id' element={<MemberDetail events={events} />} />
         </Route>
+        <Route path='/events' element={<Events events={events} />} />
       </Routes>
 
       <Footer />
