@@ -4,6 +4,7 @@ import Dash from './dash/dash.tsx'
 import Footer from './footer/footer.tsx'
 import Navbar from './navbar/Navbar.tsx'
 import Members from './members/Members.tsx'
+import MemberDetail from './members/member-card/MemberDetail.tsx'
 
 function App() {
 
@@ -13,7 +14,9 @@ function App() {
       
       <Routes>
         <Route path='/' element={<Dash/>} />
-        <Route path='/members' element={<Members/>} />
+        <Route path='/members' element={<Members/>}>
+          <Route path=':id' element={<MemberDetail />} />
+        </Route>
       </Routes>
 
       <Footer />
