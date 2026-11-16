@@ -5,9 +5,8 @@ import { members } from '../data/members';
 import { groupLabels } from '../types';
 import { filterMembers, matchesFilter, type MemberFilter } from './filterMembers';
 import MemberRow from './member-row/MemberRow';
+import { CURRENT_USER_ID } from '../data/currentUser';
 
-// TODO M3: kommt später aus dem Login/AuthContext
-const CURRENT_USER_ID = 3;
 
 const filterOptions: { value: MemberFilter; label: string }[] = [
     { value: 'alle', label: 'Alle' },
