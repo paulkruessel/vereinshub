@@ -24,7 +24,8 @@ export interface ClubEvent {
     id: number;
     title: string;
     location: string;
-    start: string;
+    startDate: Date;
+    endDate?: Date
     organizerId: number;
     attendeeIds: number[];
 }
