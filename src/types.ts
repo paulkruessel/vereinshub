@@ -7,7 +7,7 @@ export interface Member {
     email: string;
     phone?: string;
     street: string;
-    postalCode: number;
+    postalCode: string;
     city: string;
     groups: GroupId[];
     role: 'member' | 'admin'

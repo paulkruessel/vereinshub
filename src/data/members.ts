@@ -8,7 +8,7 @@ export const members: Member[] = [
         email: 'anna.schmidt@example.org',
         phone: '+49 151 000 000 01',
         street: 'Musterweg 1',
-        postalCode: 78462,
+        postalCode: '78462',
         city: 'Konstanz',
         groups: ['vorstand'],
         role: 'member'
@@ -20,7 +20,7 @@ export const members: Member[] = [
         email: 'jonas.weber@example.org',
         phone: '+49 151 000 000 02',
         street: 'Musterweg 2',
-        postalCode: 78476,
+        postalCode: '78476',
         city: 'Allensbach',
         groups: ['kassenwart'],
         role: 'member'
@@ -32,7 +32,7 @@ export const members: Member[] = [
         email: 'paul.kruessel@example.org',
         phone: '+49 151 000 000 03',
         street: 'Musterweg 3',
-        postalCode: 78462,
+        postalCode: '78462',
         city: 'Konstanz',
         groups: [],
         role: 'admin'
@@ -44,7 +44,7 @@ export const members: Member[] = [
         email: 'lena.hoffmann@example.org',
         phone: '+49 151 000 000 03',
         street: 'Musterweg 3',
-        postalCode: 78462,
+        postalCode: '78462',
         city: 'Konstanz',
         groups: ['vorstand'],
         role: 'member'
@@ -56,7 +56,7 @@ export const members: Member[] = [
         email: 'mehmet.yilmaz@example.org',
         phone: '+49 151 000 000 05',
         street: 'Musterweg 5',
-        postalCode: 78462,
+        postalCode: '78462',
         city: 'Konstanz',
         groups: [],
         role: 'member'
@@ -68,7 +68,7 @@ export const members: Member[] = [
         email: 'sophia.braun@example.org',
         phone: '+49 151 000 000 06',
         street: 'Musterweg 6',
-        postalCode: 78224,
+        postalCode: '78224',
         city: 'Singen',
         groups: [],
         role: 'member'
