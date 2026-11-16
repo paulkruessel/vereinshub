@@ -23,6 +23,7 @@ export interface Member {
 export interface ClubEvent {
     id: number;
     title: string;
+    description: string;
     location: string;
     startDate: Date;
     endDate?: Date
