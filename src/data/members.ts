@@ -10,6 +10,7 @@ export const members: Member[] = [
         street: 'Musterweg 1',
         postalCode: '78462',
         city: 'Konstanz',
+        dateJoined: new Date('2019-01-01T00:00'),
         groups: ['vorstand'],
         role: 'member'
     },
@@ -22,6 +23,7 @@ export const members: Member[] = [
         street: 'Musterweg 2',
         postalCode: '78476',
         city: 'Allensbach',
+        dateJoined: new Date('2021-01-01T00:00'),
         groups: ['kassenwart'],
         role: 'member'
     },
@@ -34,6 +36,7 @@ export const members: Member[] = [
         street: 'Musterweg 3',
         postalCode: '78462',
         city: 'Konstanz',
+        dateJoined: new Date('2023-01-01T00:00'),
         groups: [],
         role: 'admin'
     },
@@ -46,6 +49,7 @@ export const members: Member[] = [
         street: 'Musterweg 3',
         postalCode: '78462',
         city: 'Konstanz',
+        dateJoined: new Date('2017-01-01T00:00'),
         groups: ['vorstand'],
         role: 'member'
     },
@@ -58,6 +62,7 @@ export const members: Member[] = [
         street: 'Musterweg 5',
         postalCode: '78462',
         city: 'Konstanz',
+        dateJoined: new Date('2024-01-01T00:00'),
         groups: [],
         role: 'member'
     },
@@ -70,6 +75,7 @@ export const members: Member[] = [
         street: 'Musterweg 6',
         postalCode: '78224',
         city: 'Singen',
+        dateJoined: new Date('2025-01-01T00:00'),
         groups: [],
         role: 'member'
     },

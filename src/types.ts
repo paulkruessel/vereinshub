@@ -1,5 +1,11 @@
 export type GroupId = 'vorstand' | 'kassenwart' | 'jugend'
 
+export const groupLabels: Record<GroupId, string> = {
+    vorstand: 'Vorstand',
+    kassenwart: 'Kassenwart',
+    jugend: 'Jugend'
+}
+
 export interface Member {
     id: number;
     firstName: string;
@@ -9,6 +15,7 @@ export interface Member {
     street: string;
     postalCode: string;
     city: string;
+    dateJoined: Date;
     groups: GroupId[];
     role: 'member' | 'admin'
 }
