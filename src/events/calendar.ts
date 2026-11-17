@@ -40,3 +40,11 @@ export function getEventStatus(event: ClubEvent, userId: number, now: Date): Eve
     if (end < now) return 'past';
     return event.attendeeIds.includes(userId) ? 'yes' : 'open';
 }
+
+/** Datum im Format "YYYY-MM-DD" in lokaler Zeit, z. B. für <input type="date"> */
+export function toDateInputValue(date: Date): string {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // getMonth() ist 0-basiert
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}

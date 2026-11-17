@@ -17,6 +17,16 @@ function Events({ events }: EventsProps) {
         return startOfMonth(selected ? selected.startDate : new Date());
     });
 
+    // Ändert sich die ID in der URL (z. B. nach dem Anlegen eines Termins oder per Zurück-Button),
+    // springt der Kalender in den Monat des ausgewählten Events.
+    // State während des Renderns anpassen statt useEffect: siehe react.dev "You Might Not Need an Effect"
+    const [prevId, setPrevId] = useState(id);
+    if (id !== prevId) {
+        setPrevId(id);
+        const selected = events.find(e => e.id === Number(id));
+        if (selected) setMonth(startOfMonth(selected.startDate));
+    }
+
     const eventsInMonth = events.filter(e =>
         e.startDate.getFullYear() === month.getFullYear() && e.startDate.getMonth() === month.getMonth()
     ).length;
