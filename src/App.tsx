@@ -11,6 +11,7 @@ import { clubEvents } from './data/clubEvents.ts'
 import type { ClubEvent } from './types.ts'
 import EventDetail from './events/event-card/EventDetail.tsx'
 import EventForm from './events/event-form/EventForm.tsx'
+import NotFoundPage from './not-found-page/NotFoundPage.tsx'
 
 function App() {
   const [events, setEvents] = useState<ClubEvent[]>(clubEvents)
@@ -34,6 +35,9 @@ function App() {
           <Route path='new' element={<EventForm onCreate={addEvent} />} />
           <Route path=':id' element={<EventDetail events={events} />} />
         </Route>
+
+        {/* 404 immer als letzte Route */}
+        <Route path='*' element={<NotFoundPage />} />
       </Routes>
       <Footer />
     </BrowserRouter>
