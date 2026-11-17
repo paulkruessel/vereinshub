@@ -6,6 +6,7 @@ import { groupLabels } from '../types';
 import { filterMembers, matchesFilter, type MemberFilter } from './filterMembers';
 import MemberRow from './member-row/MemberRow';
 import { CURRENT_USER_ID } from '../data/currentUser';
+import ThemeSwitch from '../theme-switch/ThemeSwitch';
 
 
 const filterOptions: { value: MemberFilter; label: string }[] = [
@@ -31,14 +32,7 @@ function Members() {
                     <h1>Mitglieder</h1>
                 </div>
                 <div className="page-header__actions">
-                    <div className="theme-switch">
-                        <input className="theme-switch__input" type="checkbox" id="theme-toggle" />
-                        <label htmlFor="theme-toggle" className="theme-switch__label">
-                            <span className="vh-sr">Hellen Modus aktivieren</span>
-                            <span className="theme-switch__option theme-switch__option--light" aria-hidden="true"><svg className="vh-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></span>
-                            <span className="theme-switch__option theme-switch__option--dark" aria-hidden="true"><svg className="vh-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"></path></svg></span>
-                        </label>
-                    </div>
+                    <ThemeSwitch />
                     <Link className="vh-btn new-event-btn" to="/invitations/new">
                         <svg className="vh-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
                         <span className="sr-mobile">Mitglied einladen</span>
