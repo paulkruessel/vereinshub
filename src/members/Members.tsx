@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, Outlet, useParams } from 'react-router-dom';
+import { Link, Outlet, useParams, useSearchParams } from 'react-router-dom';
 import './Members.css';
 import { members } from '../data/members';
 import { groupLabels } from '../types';
@@ -17,7 +17,8 @@ const filterOptions: { value: MemberFilter; label: string }[] = [
 ];
 
 function Members() {
-    const [searchTerm, setSearchTerm] = useState('');
+    const [searchParams] = useSearchParams();
+    const [searchTerm, setSearchTerm] = useState(() => searchParams.get('q') ?? '');
     const [filter, setFilter] = useState<MemberFilter>('alle');
     const { id } = useParams();
 

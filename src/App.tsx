@@ -8,13 +8,16 @@ import Members from './members/Members.tsx'
 import MemberDetail from './members/member-card/MemberDetail.tsx'
 import Events from './events/Events.tsx'
 import { clubEvents } from './data/clubEvents.ts'
-import type { ClubEvent } from './types.ts'
+import type { ClubEvent, Member } from './types.ts'
 import EventDetail from './events/event-card/EventDetail.tsx'
 import EventForm from './events/event-form/EventForm.tsx'
 import NotFoundPage from './not-found-page/NotFoundPage.tsx'
+import { CURRENT_USER_ID } from './data/currentUser.ts'
+import { members } from './data/members.ts'
 
 function App() {
   const [events, setEvents] = useState<ClubEvent[]>(clubEvents)
+  const [currentUser] = useState<Member | undefined>(() => members.find(m => m.id === CURRENT_USER_ID))
 
   function addEvent(data: Omit<ClubEvent, 'id'>): ClubEvent {
     const newEvent: ClubEvent = { ...data, id: Math.max(0, ...events.map(e => e.id)) + 1 }
@@ -27,7 +30,7 @@ function App() {
       <Navbar />
 
       <Routes>
-        <Route path='/' element={<Dash/>} />
+        <Route path='/' element={<Dash events={events} currentUser={currentUser} />} />
         <Route path='/members' element={<Members/>}>
           <Route path=':id' element={<MemberDetail events={events} />} />
         </Route>

@@ -27,7 +27,7 @@ export function getMonthGrid(monthStart: Date): Date[] {
     const month = monthStart.getMonth();
 
     // getDay(): 0 = Sonntag ... 6 = Samstag -> umrechnen auf 0 = Montag ... 6 = Sonntag
-    const leadingDays = (new Date(year, month, 1).getDay() + 6) % 7;
+    const leadingDays = getWeekdayOffset(monthStart);
     const daysInMonth = new Date(year, month + 1, 0).getDate();
     const totalCells = Math.ceil((leadingDays + daysInMonth) / 7) * 7;
 
@@ -47,4 +47,26 @@ export function toDateInputValue(date: Date): string {
     const month = String(date.getMonth() + 1).padStart(2, '0'); // getMonth() ist 0-basiert
     const day = String(date.getDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
+}
+
+export function getUpcomingEvents(events: ClubEvent[], now: Date): ClubEvent[] {
+    return events
+        .filter(e => e.startDate >= now)
+        .sort((a, b) => a.startDate.getTime() - b.startDate.getTime());
+}
+
+export function daysUntil(date: Date, now: Date): number {
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const target = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    return Math.round((target.getTime() - today.getTime()) / 86_400_000);
+}
+
+export function getWeekdayOffset(monthStart: Date): number {
+    return (new Date(monthStart.getFullYear(), monthStart.getMonth(), 1).getDay() + 6) % 7;
+}
+
+export function getPastEvents(events: ClubEvent[], now: Date): ClubEvent[] {
+    return events
+        .filter(e => (e.endDate ?? e.startDate) < now)
+        .sort((a, b) => b.startDate.getTime() - a.startDate.getTime());
 }
