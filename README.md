@@ -96,3 +96,105 @@ Danach ist der Prototyp unter http://localhost:3000 erreichbar. `serve` liefert 
 | | Query-Parameter als Filter | `prototype/members/index.html:66`, `prototype/events/2.html:63` |
 | | Unterressource per `POST` | `prototype/events/2.html:211` |
 | | 404-Seite | `prototype/404.html:79` |
+
+## Meilenstein 2: React-App
+
+Der Prototyp aus M1 lebt jetzt als React-App mit TypeScript in `src/`. Die Daten kommen in diesem Meilenstein noch aus lokalen Mock-Dateien (`src/data/`) und werden im React-State gehalten. Backend, Datenbank und Login folgen in M3.
+
+### Starten
+
+Voraussetzung: aktuelles Node.js (LTS) mit npm.
+
+```bash
+npm install
+npm run dev
+```
+
+Danach ist die App unter http://localhost:5173 erreichbar.
+
+| Befehl | Zweck |
+|---|---|
+| `npm run dev` | Entwicklungsserver (Vite) mit Hot Reload |
+| `npm run build` | Typprüfung mit `tsc -b` und Produktions-Build nach `dist/` |
+| `npm run lint` | ESLint mit `typescript-eslint` und den React-Hooks-Regeln |
+| `npm run preview` | gebauten Stand aus `dist/` lokal ausliefern |
+| `npm run prototype` | statischen Prototyp aus M1 starten |
+
+Eingeloggt ist fest das Mitglied *Paul Krüssel* (ID 3, Rolle Admin, `src/data/currentUser.ts`). Die Mock-Daten enthalten 6 Mitglieder und 26 Veranstaltungen von September 2026 bis Januar 2027.
+
+### Routen
+
+| URL | Komponente | Inhalt |
+|---|---|---|
+| `/` | `Dash` | Dashboard: Countdown zum nächsten Termin, Mini-Kalender, kommende Termine, zuletzt vergangene Termine |
+| `/members` | `Members` | Mitgliederliste mit Suche und Gruppenfilter |
+| `/members/:id` | `MemberDetail` → `MemberCard` | Profil als Seitenpanel neben der Liste |
+| `/members?q=…` | `Members` | Liste mit vorausgefüllter Suche (Suchfeld im Dashboard) |
+| `/events` | `Events` | Monatskalender mit Blättern zwischen den Monaten |
+| `/events/:id` | `EventDetail` → `EventCard` | Termindetails als Seitenpanel neben dem Kalender |
+| `/events/new` | `EventForm` | Formular für einen neuen Termin, ebenfalls als Seitenpanel |
+| jede andere URL | `NotFoundPage` | 404-Ansicht |
+
+`/members/:id`, `/events/:id` und `/events/new` sind verschachtelte Routen. Die Elternseite bleibt sichtbar und rendert das Kind über `<Outlet />` im Seitenpanel. Welches Mitglied oder welcher Termin geöffnet ist, steht damit in der URL: Reload, Zurück-Button und geteilte Links funktionieren ohne zusätzlichen State.
+
+### Aufbau
+
+```
+src/
+├── App.tsx              Router und gemeinsamer State (Events, aktueller User)
+├── types.ts             Domänentypen Member, ClubEvent, GroupId
+├── data/                Mock-Daten und aktueller User
+├── dash/                Dashboard und seine Kacheln
+├── members/             Mitgliederliste, Zeile, Profilkarte, Filterlogik
+├── events/              Kalender, Detailkarte, Formular, Datumslogik (calendar.ts)
+├── navbar/, footer/     Rahmen der App
+├── theme-switch/        Hell/Dunkel-Umschalter
+└── not-found-page/      404-Ansicht
+```
+
+- **State hochgezogen:** Die Liste der Veranstaltungen liegt als einziger State in `App` und wird per Props an Dashboard, Kalender, Detailkarten und Mitgliederprofil gegeben. Das Formular meldet neue Termine über den Callback `onCreate` zurück. So erscheint ein neuer Termin sofort im Kalender, auf dem Dashboard und im Profil des Veranstalters.
+- **Abgeleitete Werte statt doppeltem State:** Gefilterte Mitgliederliste, kommende Termine, Countdown und Status werden bei jedem Render aus dem State berechnet, nicht separat gespeichert.
+- **Logik getrennt von der Darstellung:** Filter- und Datumslogik liegen als reine Funktionen in `members/filterMembers.ts` und `events/calendar.ts`. Sie hängen nicht von React ab und lassen sich in M4 direkt testen.
+- **Route-Komponente und Anzeige-Komponente:** `MemberDetail` und `EventDetail` lesen die ID aus der URL und suchen die Daten zusammen, `MemberCard` und `EventCard` zeigen nur an, was sie per Props bekommen.
+
+### Kriterien-Zuordnung
+
+| Kriterium | Umsetzung | Datei:Zeile |
+|---|---|---|
+| **Tooling: npm und Vite** | Skripte für Dev-Server, Build, Lint | `package.json:6-12` |
+| **Tooling: TypeScript aktiv genutzt** | Domänentypen und Union-Types | `src/types.ts:1`, `:9`, `:23` |
+| | `Record` erzwingt ein Label für jede Gruppe | `src/types.ts:3` |
+| | eigener Filtertyp aus Union und `GroupId` | `src/members/filterMembers.ts:3` |
+| | `Omit<ClubEvent, 'id'>`: Formular liefert Termin ohne ID, `App` vergibt sie | `src/App.tsx:22` |
+| | typisierte Props-Interfaces in jeder Komponente, z. B. | `src/members/member-row/MemberRow.tsx:4`, `src/events/month-calendar/MonthCalendar.tsx:6` |
+| | strenge Compiler-Optionen | `tsconfig.app.json:14`, `:20-21` |
+| **Komponenten** | Seite → Liste → Zeile | `src/members/Members.tsx:87-88`, `src/members/member-row/MemberRow.tsx:10` |
+| | Dashboard aus vier Kachel-Komponenten | `src/dash/dash.tsx:45-52` |
+| | Kalender als eigene Komponente | `src/events/Events.tsx:58`, `src/events/month-calendar/MonthCalendar.tsx:16` |
+| | wiederverwendbare Komponenten (`ThemeSwitch` auf drei Seiten) | `src/theme-switch/ThemeSwitch.tsx`, `src/dash/dash.tsx:36` |
+| **Daten über Props** | Mitglied und Termine an die Profilkarte | `src/members/member-card/MemberDetail.tsx:14`, `src/members/member-card/MemberCard.tsx:8` |
+| | Callbacks als Props (Monat blättern, Termin anlegen) | `src/events/Events.tsx:62-63`, `src/App.tsx:38` |
+| **`useState`** | Suchtext und Gruppenfilter | `src/members/Members.tsx:21-22` |
+| | Formularfelder und Fehlermeldung | `src/events/event-form/EventForm.tsx:15-21` |
+| | angezeigter Monat im Kalender | `src/events/Events.tsx:16` |
+| | gemeinsame Termin-Liste und aktueller User | `src/App.tsx:19-20` |
+| | Update auf Basis des vorherigen States | `src/App.tsx:24` |
+| **`useEffect`** | Theme mit `<html data-theme>` und `localStorage` synchronisieren | `src/theme-switch/ThemeSwitch.tsx:18-25` |
+| **Durchgängige Nutzeraktion: Filter** | Eingabe → State → `filterMembers` → Liste, inkl. leerem Zustand | `src/members/Members.tsx:25`, `:55`, `:66`, `:98-100`, `src/members/filterMembers.ts:16` |
+| **Durchgängige Nutzeraktion: Formular → Liste** | Validierung, neuer Termin, Sprung zur Detailansicht | `src/events/event-form/EventForm.tsx:23-54`, `src/App.tsx:22-26` |
+| **Formular mit `label htmlFor` und `name`** | Terminformular | `src/events/event-form/EventForm.tsx:66-99` |
+| **React Router: mehr als drei Routen** | Übersicht, Liste, Detail, Formular, 404 | `src/App.tsx:32-44` |
+| | verschachtelte Routen mit `<Outlet />` | `src/App.tsx:34-40`, `src/members/Members.tsx:104`, `src/events/Events.tsx:65` |
+| | `useParams` für Detailansichten | `src/members/member-card/MemberDetail.tsx:11`, `src/events/event-card/EventDetail.tsx:13` |
+| | `useNavigate` nach dem Absenden | `src/events/event-form/EventForm.tsx:54`, `src/dash/dash-search/DashSearch.tsx:11` |
+| | Query-Parameter `?q=` als Startwert der Suche | `src/members/Members.tsx:20-21` |
+| | `NavLink` markiert die aktive Seite (`aria-current`) | `src/navbar/Navbar.tsx:20-24` |
+| | Catch-all-Route für 404 | `src/App.tsx:43` |
+
+### Bewusste Grenzen in M2
+
+- **Keine Persistenz:** Neue Termine leben nur im React-State und sind nach einem Reload wieder weg. Das ist für M2 vorgesehen. In M3 lädt die App die Daten per `fetch` aus dem eigenen Backend.
+- **Fester User:** Der eingeloggte User ist fest eingestellt (ID 3). Login und Rollenprüfung folgen in M3. Die Rechte aus dem Rollenkonzept (z. B. nur Admins laden Mitglieder ein) sind deshalb noch nicht durchgesetzt.
+- **404 nur im Client:** Anders als im statischen Prototyp antwortet der Vite-Server bei einer Single-Page-App auf jede URL mit `index.html` und Status 200. Erst React Router zeigt die 404-Ansicht. Echte 404-Statuscodes liefert ab M3 das Backend für unbekannte API-Ressourcen.
+- **Noch nicht umgesetzt:** Zu- und Absagen, Kommentare, Gruppen-Einladungen, Dateiablage, Verwaltung und Profil bearbeiten. Die Links in der Navigation zu `/files`, `/admin` und `/profile` führen deshalb auf die 404-Ansicht. Der Bereich „Aus dem Verein“ auf dem Dashboard zeigt bis zur Einführung von Kommentaren die zuletzt vergangenen Termine.
+- **Unbekannte IDs:** `/members/99` und `/events/99` zeigen nur einen kurzen Hinweis im Seitenpanel statt einer gestalteten Fehleransicht.
