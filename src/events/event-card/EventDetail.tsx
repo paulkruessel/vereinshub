@@ -7,9 +7,10 @@ import EventCard from './EventCard';
 
 interface EventDetailProps {
     events: ClubEvent[];
+    onToggleAttendance: (eventId: number) => void;
 }
 
-function EventDetail({ events }: EventDetailProps) {
+function EventDetail({ events, onToggleAttendance }: EventDetailProps) {
     const { id } = useParams();
     const event = events.find(e => e.id === Number(id));
     if (!event) return <p>Veranstaltung nicht gefunden</p>; // TODO: Hier 404 Page anbinden
@@ -18,7 +19,8 @@ function EventDetail({ events }: EventDetailProps) {
     const attendees = members.filter(m => event.attendeeIds.includes(m.id));
     const status = getEventStatus(event, CURRENT_USER_ID, new Date());
 
-    return <EventCard event={event} status={status} organizer={organizer} attendees={attendees} />;
+    return <EventCard event={event} status={status} organizer={organizer} attendees={attendees}
+        onToggleAttendance={() => onToggleAttendance(event.id)} />;
 }
 
 export default EventDetail;

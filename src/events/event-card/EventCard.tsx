@@ -7,6 +7,7 @@ interface EventCardProps {
     status: EventStatus;
     organizer?: Member;
     attendees: Member[];
+    onToggleAttendance: () => void;
 }
 
 const statusBadges: Record<EventStatus, { label: string; className: string }> = {
@@ -23,12 +24,13 @@ function formatTime(date: Date): string {
     return date.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
 }
 
-function EventCard({ event, status, organizer, attendees }: EventCardProps) {
+function EventCard({ event, status, organizer, attendees, onToggleAttendance }: EventCardProps) {
     const badge = statusBadges[status];
     const timeRange = event.endDate
         ? `${formatTime(event.startDate)} - ${formatTime(event.endDate)} Uhr`
         : `ab ${formatTime(event.startDate)} Uhr`;
     const isPast = status === 'past';
+    const isAttending = status === 'yes';
 
     return (
         <article className="vh-detail split__side event-detail" aria-labelledby="event-title">
@@ -76,6 +78,18 @@ function EventCard({ event, status, organizer, attendees }: EventCardProps) {
                         ))}
                     </span>
                 </p>
+                {!isPast && (
+                    <button
+                        type="button"
+                        className={`vh-btn new-event-btn${isAttending ? ' vh-btn--ghost' : ''}`}
+                        onClick={onToggleAttendance}
+                    >
+                        <svg className="vh-icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d={isAttending ? 'M18 6L6 18M6 6l12 12' : 'M12 5v14M5 12h14'}></path>
+                        </svg>
+                        <span className="sr-mobile">{isAttending ? 'Absagen' : 'Zusagen'}</span>
+                    </button>
+                )}
             </section>
         </article>
     );

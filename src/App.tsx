@@ -25,6 +25,17 @@ function App() {
     return newEvent   // damit das Formular zur Detailseite springen kann
   }
 
+  // Meldet den eingeloggten User für ein Event an bzw. wieder ab
+  function toggleAttendance(eventId: number) {
+    setEvents(prev => prev.map(e => {
+      if (e.id !== eventId) return e
+      const attendeeIds = e.attendeeIds.includes(CURRENT_USER_ID)
+        ? e.attendeeIds.filter(id => id !== CURRENT_USER_ID)
+        : [...e.attendeeIds, CURRENT_USER_ID]
+      return { ...e, attendeeIds }
+    }))
+  }
+
   return (
     <BrowserRouter>
       <Navbar />
@@ -36,7 +47,7 @@ function App() {
         </Route>
         <Route path='/events' element={<Events events={events} />}>
           <Route path='new' element={<EventForm onCreate={addEvent} />} />
-          <Route path=':id' element={<EventDetail events={events} />} />
+          <Route path=':id' element={<EventDetail events={events} onToggleAttendance={toggleAttendance} />} />
         </Route>
 
         {/* 404 immer als letzte Route */}
