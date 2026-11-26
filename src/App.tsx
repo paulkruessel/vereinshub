@@ -1,5 +1,5 @@
 import './App.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Dash from './dash/dash.tsx'
 import Footer from './footer/footer.tsx'
@@ -15,8 +15,36 @@ import NotFoundPage from './not-found-page/NotFoundPage.tsx'
 import { CURRENT_USER_ID } from './data/currentUser.ts'
 import { members } from './data/members.ts'
 
+const EVENTS_STORAGE_KEY = 'vereinshub-events'
+
+// Liest die gespeicherten Events; ohne Eintrag (oder bei Fehlern) die Mock-Daten
+function readStoredEvents(): ClubEvent[] {
+  try {
+    const stored = localStorage.getItem(EVENTS_STORAGE_KEY)
+    if (!stored) return clubEvents
+    // JSON kennt kein Date -> Datumsfelder wieder in Date-Objekte umwandeln
+    const parsed = JSON.parse(stored) as ClubEvent[]
+    return parsed.map(e => ({
+      ...e,
+      startDate: new Date(e.startDate),
+      endDate: e.endDate ? new Date(e.endDate) : undefined
+    }))
+  } catch {
+    return clubEvents
+  }
+}
+
 function App() {
-  const [events, setEvents] = useState<ClubEvent[]>(clubEvents)
+  const [events, setEvents] = useState<ClubEvent[]>(readStoredEvents)
+
+  // Neue Events und An-/Abmeldungen ändern beide `events` -> bei jeder Änderung speichern
+  useEffect(() => {
+    try {
+      localStorage.setItem(EVENTS_STORAGE_KEY, JSON.stringify(events))
+    } catch {
+      // Speichern nicht möglich: Änderungen gelten dann nur bis zum Reload
+    }
+  }, [events])
   const [currentUser] = useState<Member | undefined>(() => members.find(m => m.id === CURRENT_USER_ID))
 
   function addEvent(data: Omit<ClubEvent, 'id'>): ClubEvent {
